@@ -18,9 +18,17 @@ Current http server implementation provides two distinct routes for mockup data 
 
 ### Routes
 
+
+	GetCommonStats        = "/"
+	GetNodeRewards        = ""
+	GetNodeActionsHistory = ""
+
 | Route | Method | Response Description
 |-------|-------|-----|
 | `/nebulas/all` | `GET` | `Nebulas list`
 | `/nodes/all` | `GET` | `Nodes list`
+| `/common/stats` | `GET` | `Common gravity node stats`
+| `/nodes/rewards/all` | `GET` | `Node rewards`
+| `/nodes/actions/history` | `GET` | `Nodes actions history`
 
 
