@@ -5,19 +5,20 @@ import (
 	"time"
 )
 
+
+// Pure functions
 func AddNodes (nebula model.Nebula, nodes ...model.Node) model.Nebula {
 	nebula.NodesUsing = append(nebula.NodesUsing, nodes...)
 
 	return nebula
 }
-
 func AddNebulas (node model.Node, nebulas ...model.Nebula) model.Node {
 	node.NebulasUsing = append(node.NebulasUsing, nebulas...)
 
 	return node
 }
 
-
+// Mockup functions
 func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 	var demoNode = model.Node{
 		Name:          "Demo Node #1",
@@ -57,21 +58,21 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 
 	var demoNebula = model.Nebula{
 		Name:            "Demo Nebula",
-		Status:          model.PendingStatus,
+		Status:          model.NebulaPendingStatus,
 		Description:     "",
 		Score:           50,
-		SubscriptionFee: 10 * WAVES_DECIMAL,
+		SubscriptionFee: 10 * WavesDecimal,
 		TargetChain:     model.WAVES_TARGET_CHAIN,
 		Extractor:       nil,
 		NodesUsing:      nil,
 	}
 	var binanceNebula = model.Nebula{
 		Name:            "Binance Nebula",
-		Status:          model.ActiveStatus,
+		Status:          model.NebulaActiveStatus,
 		Description:     "",
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
-		SubscriptionFee: 10 * ETH_DECIMAL,
+		SubscriptionFee: 10 * EthDecimal,
 		Extractor:       nil,
 		NodesUsing:      nil,
 	}
@@ -88,4 +89,55 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 	}
 
 	return &nebulaList, &nodeList
+}
+
+func GetCommonStatsMockup() *model.CommonStats {
+	stats := model.CommonStats{
+		NodesCount: 25,
+		Pulses:     20 * 1000,
+		DataFeeds:  125,
+	}
+	return &stats
+}
+
+func GetNodeRewardsListMockup() *[]model.NodeReward {
+	rewards := []model.NodeReward {
+		model.NodeReward{
+			Amount:    10 * WavesDecimal,
+			Decimals:   8,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "WAVES",
+		},
+		model.NodeReward{
+			Amount:    11 * WavesDecimal,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "WAVES",
+		},
+		model.NodeReward{
+			Amount:    12 * WavesDecimal,
+			Decimals:   8,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "WAVES",
+		},
+		model.NodeReward{
+			Amount:    15 * EthDecimal,
+			Decimals:   18,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "ETH",
+		},
+		model.NodeReward{
+			Amount:    3456 * WavesDecimal,
+			Decimals:   8,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "WAVES",
+		},
+		model.NodeReward{
+			Amount:    9523 * EthDecimal,
+			Decimals:   18,
+			Timestamp: time.Time{}.Unix(),
+			Currency:  "ETH",
+		},
+	}
+
+	return &rewards
 }

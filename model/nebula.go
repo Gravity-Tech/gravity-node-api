@@ -11,8 +11,8 @@ const (
 
 // Nebula states
 const (
-	PendingStatus uint = iota
-	ActiveStatus
+	NebulaPendingStatus uint = iota
+	NebulaActiveStatus
 )
 
 type Score = uint16

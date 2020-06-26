@@ -32,3 +32,24 @@ func GetAllNodes(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Fprint(w, string(bytes))
 }
+
+func GetCommonStats(w http.ResponseWriter, req *http.Request) {
+	stats := utils.GetCommonStatsMockup()
+
+	bytes, _ := json.Marshal(stats)
+
+	addBaseHeaders(w.Header())
+
+	fmt.Fprint(w, string(bytes))
+}
+
+
+func GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
+	rewards := utils.GetNodeRewardsListMockup()
+
+	bytes, _ := json.Marshal(rewards)
+
+	addBaseHeaders(w.Header())
+
+	fmt.Fprint(w, string(bytes))
+}

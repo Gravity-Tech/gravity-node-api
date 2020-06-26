@@ -1,6 +1,9 @@
 package router
 
 const (
-	GET_ALL_NEBULAS = "/nebulas/all"
-	GET_ALL_NODES = "/nodes/all"
+	GetAllNebulas = "/nebulas/all"
+	GetAllNodes   = "/nodes/all"
+	GetCommonStats        = "/common/stats"
+	GetNodeRewards        = "/nodes/rewards/all"
+	GetNodeActionsHistory = "/nodes/actions/history"
 )

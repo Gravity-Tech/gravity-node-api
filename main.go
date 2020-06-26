@@ -25,8 +25,11 @@ func init() {
 
 func main () {
 	http.HandleFunc("/hello", headers)
-	http.HandleFunc(router.GET_ALL_NEBULAS, controller.GetAllNebulas)
-	http.HandleFunc(router.GET_ALL_NODES, controller.GetAllNodes)
+	http.HandleFunc(router.GetAllNebulas, controller.GetAllNebulas)
+	http.HandleFunc(router.GetAllNodes, controller.GetAllNodes)
+	http.HandleFunc(router.GetCommonStats, controller.GetCommonStats)
+	http.HandleFunc(router.GetNodeRewards, controller.GetNodeRewardsList)
+	http.HandleFunc(router.GetNodeActionsHistory, controller.GetAllNodes)
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
