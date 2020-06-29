@@ -11,6 +11,7 @@ const (
 	NodeVoteReceived
 )
 
+// swagger:model
 type NodeSocials struct {
 	Telegram string  `json:"tg"`
 	Facebook string  `json:"fb"`
@@ -18,10 +19,12 @@ type NodeSocials struct {
 	Twitter string  `json:"twitter"`
 }
 
+// swagger:model
 type NodeContacts struct {
 	Website string  `json:"website"`
 }
 
+// swagger:model
 type Node struct {
 	Name string  `json:"name"`
 	Description string  `json:"description"`
@@ -31,8 +34,7 @@ type Node struct {
 	DepositAmount int64 `json:"deposit_amount"`
 
 	JoinedAt int64 `json:"joined_at"`
-	LockedUntil int64 `json:"locked_until"`
-	// JoinedAt > LockedUntil - node is active
+	LockedUntil int64 `json:"locked_until"` // JoinedAt > LockedUntil - node is active
 
 	NebulasUsing []Nebula `json:"nebulas_using"`
 
@@ -40,6 +42,7 @@ type Node struct {
 	Socials NodeSocials `json:"socials"`
 }
 
+// swagger:model
 type NodeHistoryRecord struct {
 	Name string  `json:"name"`
 	Type NodeActionType `json:"type"`

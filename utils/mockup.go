@@ -132,7 +132,7 @@ func GetNodeRewardsListMockup() *[]model.NodeReward {
 			Currency:  "WAVES",
 		},
 		model.NodeReward{
-			Amount:    9523 * EthDecimal,
+			Amount:    1 * EthDecimal,
 			Decimals:   18,
 			Timestamp: time.Time{}.Unix(),
 			Currency:  "ETH",

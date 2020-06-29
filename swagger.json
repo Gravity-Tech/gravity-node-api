@@ -1,0 +1,469 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "the purpose of this application is to provide an application\nthat is using plain go code to define an API",
+    "title": "Gravity Node API.",
+    "termsOfService": "there are no TOS at this moment, use at your own risk we take no responsibility",
+    "contact": {
+      "name": "venlab.dev",
+      "url": "https://venlab.dev",
+      "email": "shamil@venlab.dev"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "1.0"
+  },
+  "host": "localhost",
+  "basePath": "/v1",
+  "paths": {
+    "/common/stats": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "oauth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "description": "This will show all gravity common stats",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Common"
+        ],
+        "summary": "Returns gravity node common statistics",
+        "operationId": "common",
+        "responses": {
+          "200": {
+            "description": "CommonStats",
+            "schema": {
+              "$ref": "#/definitions/CommonStats"
+            }
+          }
+        }
+      }
+    },
+    "/nebulas/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "oauth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "description": "This will show all available gravity nebulas",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nebulas"
+        ],
+        "summary": "Returns all available gravity nebulas",
+        "operationId": "nebulas",
+        "responses": {
+          "200": {
+            "description": "Nebula",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Nebula"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "oauth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "description": "This will show all available gravity nodes",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Returns all available gravity nodes",
+        "operationId": "nodes",
+        "responses": {
+          "200": {
+            "description": "Node",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Node"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/rewards/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "oauth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "description": "This will show all gravity node mockup rewards list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Returns gravity node mockup rewards",
+        "operationId": "nodes",
+        "responses": {
+          "200": {
+            "description": "NodeReward",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NodeReward"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Asset": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "x-go-name": "Amount"
+        },
+        "decimals": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Decimals"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "CommonStats": {
+      "type": "object",
+      "properties": {
+        "data_feeds": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataFeeds"
+        },
+        "nodes_count": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "NodesCount"
+        },
+        "pulses": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Pulses"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "IExtractor": {
+      "type": "object",
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "Nebula": {
+      "type": "object",
+      "required": [
+        "name",
+        "status",
+        "description",
+        "score",
+        "target_chain"
+      ],
+      "properties": {
+        "description": {
+          "description": "the description of the nebula",
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "extractor": {
+          "$ref": "#/definitions/IExtractor"
+        },
+        "name": {
+          "description": "the name of the nebula",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "nodes_using": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "x-go-name": "NodesUsing"
+        },
+        "score": {
+          "description": "the score of the nebula",
+          "type": "integer",
+          "format": "uint16",
+          "x-go-name": "Score"
+        },
+        "status": {
+          "description": "the status of the nebula",
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Status"
+        },
+        "subscription_fee": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "SubscriptionFee"
+        },
+        "target_chain": {
+          "description": "the target chain of the nebula\nrecently allowed: WAVES, ETH",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TargetChain"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "contacts": {
+          "$ref": "#/definitions/NodeContacts"
+        },
+        "deposit_amount": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "DepositAmount"
+        },
+        "deposit_chain": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "DepositChain"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "joined_at": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "JoinedAt"
+        },
+        "locked_until": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "LockedUntil"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "nebulas_using": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Nebula"
+          },
+          "x-go-name": "NebulasUsing"
+        },
+        "score": {
+          "type": "integer",
+          "format": "uint16",
+          "x-go-name": "Score"
+        },
+        "socials": {
+          "$ref": "#/definitions/NodeSocials"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "NodeContacts": {
+      "type": "object",
+      "properties": {
+        "website": {
+          "type": "string",
+          "x-go-name": "Website"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "NodeHistoryRecord": {
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/Asset"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "status": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Status"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "Timestamp"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Type"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "NodeReward": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "Amount"
+        },
+        "currency": {
+          "type": "string",
+          "x-go-name": "Currency"
+        },
+        "decimals": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Decimals"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Timestamp"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    },
+    "NodeSocials": {
+      "type": "object",
+      "properties": {
+        "fb": {
+          "type": "string",
+          "x-go-name": "Facebook"
+        },
+        "linkedin": {
+          "type": "string",
+          "x-go-name": "Linked"
+        },
+        "tg": {
+          "type": "string",
+          "x-go-name": "Telegram"
+        },
+        "twitter": {
+          "type": "string",
+          "x-go-name": "Twitter"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "KEY",
+      "in": "header"
+    },
+    "oauth2": {
+      "type": "oauth2",
+      "in": "header",
+      "flow": "accessCode",
+      "authorizationUrl": "/oauth2/auth",
+      "tokenUrl": "/oauth2/token",
+      "scopes": {
+        "bar": "foo"
+      }
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "x-meta-array": [
+    "value1",
+    "value2"
+  ],
+  "x-meta-array-obj": [
+    {
+      "name": "obj",
+      "value": "field"
+    }
+  ],
+  "x-meta-value": "value"
+}

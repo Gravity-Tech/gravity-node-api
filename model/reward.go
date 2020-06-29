@@ -1,5 +1,6 @@
 package model
 
+// swagger:model
 type NodeReward struct {
 	Amount uint64 `json:"amount"`
 	Decimals int `json:"decimals"`

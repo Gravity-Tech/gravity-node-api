@@ -13,6 +13,28 @@ func addBaseHeaders (headers http.Header) {
 	headers.Add("Content-Type", "application/json")
 }
 
+// swagger:route GET /nebulas/all Nebulas nebulas
+//
+// Returns all available gravity nebulas
+//
+// This will show all available gravity nebulas
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//       oauth: read, write
+//
+//     Responses:
+//       200: []Nebula
 func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
 	nebulasList, _ := utils.GetMockup()
 
@@ -23,16 +45,61 @@ func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(w, string(bytes))
 }
 
+
+// swagger:route GET /nodes/all Nodes nodes
+//
+// Returns all available gravity nodes
+//
+// This will show all available gravity nodes
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//       oauth: read, write
+//
+//     Responses:
+//       200: []Node
 func GetAllNodes(w http.ResponseWriter, req *http.Request) {
 	_, nodeList := utils.GetMockup()
 
 	bytes, _ := json.Marshal(nodeList)
-
 	addBaseHeaders(w.Header())
 
 	fmt.Fprint(w, string(bytes))
 }
 
+
+// swagger:route GET /common/stats Common common
+//
+// Returns gravity node common statistics
+//
+// This will show all gravity common stats
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//       oauth: read, write
+//
+//     Responses:
+//       200: CommonStats
 func GetCommonStats(w http.ResponseWriter, req *http.Request) {
 	stats := utils.GetCommonStatsMockup()
 
@@ -43,7 +110,28 @@ func GetCommonStats(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(w, string(bytes))
 }
 
-
+// swagger:route GET /nodes/rewards/all Nodes nodes
+//
+// Returns gravity node mockup rewards
+//
+// This will show all gravity node mockup rewards list
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//       oauth: read, write
+//
+//     Responses:
+//       200: []NodeReward
 func GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
 	rewards := utils.GetNodeRewardsListMockup()
 

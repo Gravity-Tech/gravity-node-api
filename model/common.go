@@ -7,6 +7,7 @@ const (
 	CommonDoneStatus
 )
 
+// swagger:model
 type CommonStats struct {
 	NodesCount uint `json:"nodes_count"`
 	Pulses uint `json:"pulses"`
