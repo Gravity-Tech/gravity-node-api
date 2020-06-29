@@ -13,7 +13,7 @@ func addBaseHeaders (headers http.Header) {
 	headers.Add("Content-Type", "application/json")
 }
 
-// swagger:route GET /nebulas/all Nebulas nebulas
+// swagger:route GET /nebulas/all Nebulas getAllNebulas
 //
 // Returns all available gravity nebulas
 //
@@ -31,7 +31,6 @@ func addBaseHeaders (headers http.Header) {
 //
 //     Security:
 //       api_key:
-//       oauth: read, write
 //
 //     Responses:
 //       200: []Nebula
@@ -46,7 +45,7 @@ func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
 }
 
 
-// swagger:route GET /nodes/all Nodes nodes
+// swagger:route GET /nodes/all Nodes getAllNodes
 //
 // Returns all available gravity nodes
 //
@@ -64,7 +63,6 @@ func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
 //
 //     Security:
 //       api_key:
-//       oauth: read, write
 //
 //     Responses:
 //       200: []Node
@@ -78,7 +76,7 @@ func GetAllNodes(w http.ResponseWriter, req *http.Request) {
 }
 
 
-// swagger:route GET /common/stats Common common
+// swagger:route GET /common/stats Common getCommonStats
 //
 // Returns gravity node common statistics
 //
@@ -96,7 +94,6 @@ func GetAllNodes(w http.ResponseWriter, req *http.Request) {
 //
 //     Security:
 //       api_key:
-//       oauth: read, write
 //
 //     Responses:
 //       200: CommonStats
@@ -110,7 +107,7 @@ func GetCommonStats(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(w, string(bytes))
 }
 
-// swagger:route GET /nodes/rewards/all Nodes nodes
+// swagger:route GET /nodes/rewards/all Nodes getNodeRewards
 //
 // Returns gravity node mockup rewards
 //
@@ -128,7 +125,6 @@ func GetCommonStats(w http.ResponseWriter, req *http.Request) {
 //
 //     Security:
 //       api_key:
-//       oauth: read, write
 //
 //     Responses:
 //       200: []NodeReward

@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="341b3c7d-a35d-4303-8ac4-5354761459f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/swagger.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/responsecontroller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/responsecontroller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/asset.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/asset.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/extractor.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/extractor.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/nebula.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/nebula.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/node.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/reward.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/reward.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mockup.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mockup.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

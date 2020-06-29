@@ -25,7 +25,7 @@
     },
     "version": "1.0"
   },
-  "host": "localhost",
+  "host": "node-ui.gravityhub.org",
   "basePath": "/v1",
   "paths": {
     "/common/stats": {
@@ -33,12 +33,6 @@
         "security": [
           {
             "api_key": []
-          },
-          {
-            "oauth": [
-              "read",
-              "write"
-            ]
           }
         ],
         "description": "This will show all gravity common stats",
@@ -56,7 +50,7 @@
           "Common"
         ],
         "summary": "Returns gravity node common statistics",
-        "operationId": "common",
+        "operationId": "getCommonStats",
         "responses": {
           "200": {
             "description": "CommonStats",
@@ -72,12 +66,6 @@
         "security": [
           {
             "api_key": []
-          },
-          {
-            "oauth": [
-              "read",
-              "write"
-            ]
           }
         ],
         "description": "This will show all available gravity nebulas",
@@ -95,7 +83,7 @@
           "Nebulas"
         ],
         "summary": "Returns all available gravity nebulas",
-        "operationId": "nebulas",
+        "operationId": "getAllNebulas",
         "responses": {
           "200": {
             "description": "Nebula",
@@ -114,12 +102,6 @@
         "security": [
           {
             "api_key": []
-          },
-          {
-            "oauth": [
-              "read",
-              "write"
-            ]
           }
         ],
         "description": "This will show all available gravity nodes",
@@ -137,7 +119,7 @@
           "Nodes"
         ],
         "summary": "Returns all available gravity nodes",
-        "operationId": "nodes",
+        "operationId": "getAllNodes",
         "responses": {
           "200": {
             "description": "Node",
@@ -156,12 +138,6 @@
         "security": [
           {
             "api_key": []
-          },
-          {
-            "oauth": [
-              "read",
-              "write"
-            ]
           }
         ],
         "description": "This will show all gravity node mockup rewards list",
@@ -179,7 +155,7 @@
           "Nodes"
         ],
         "summary": "Returns gravity node mockup rewards",
-        "operationId": "nodes",
+        "operationId": "getNodeRewards",
         "responses": {
           "200": {
             "description": "NodeReward",
@@ -438,16 +414,6 @@
       "type": "apiKey",
       "name": "KEY",
       "in": "header"
-    },
-    "oauth2": {
-      "type": "oauth2",
-      "in": "header",
-      "flow": "accessCode",
-      "authorizationUrl": "/oauth2/auth",
-      "tokenUrl": "/oauth2/token",
-      "scopes": {
-        "bar": "foo"
-      }
     }
   },
   "security": [

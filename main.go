@@ -10,7 +10,7 @@
 // there are no TOS at this moment, use at your own risk we take no responsibility
 //
 //     Schemes: http, https
-//     Host: localhost
+//     Host: node-ui.gravityhub.org
 //     BasePath: /v1
 //     Version: 1.0
 //     License: MIT http://opensource.org/licenses/MIT
@@ -30,14 +30,6 @@
 //          type: apiKey
 //          name: KEY
 //          in: header
-//     oauth2:
-//         type: oauth2
-//         authorizationUrl: /oauth2/auth
-//         tokenUrl: /oauth2/token
-//         in: header
-//         scopes:
-//           bar: foo
-//         flow: accessCode
 //
 //     Extensions:
 //     x-meta-value: value
@@ -60,6 +52,8 @@ import (
 )
 
 var port string
+
+const hostName = "localdgsdfg"
 
 func headers(w http.ResponseWriter, req *http.Request) {
 	for name, headers := range req.Header {
