@@ -51,23 +51,6 @@
         ],
         "summary": "Returns gravity node common statistics",
         "operationId": "getCommonStats",
-        "parameters": [
-          {
-            "type": "string",
-            "x-go-name": "Query",
-            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
-            "name": "q",
-            "in": "query"
-          },
-          {
-            "type": "integer",
-            "format": "uint64",
-            "x-go-name": "Page",
-            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
-            "name": "page",
-            "in": "query"
-          }
-        ],
         "responses": {
           "200": {
             "description": "CommonStats",
@@ -113,8 +96,16 @@
             "type": "integer",
             "format": "uint64",
             "x-go-name": "Page",
-            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
             "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
             "in": "query"
           }
         ],
@@ -166,8 +157,16 @@
             "type": "integer",
             "format": "uint64",
             "x-go-name": "Page",
-            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
             "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
             "in": "query"
           }
         ],
@@ -207,6 +206,31 @@
         ],
         "summary": "Returns gravity node mockup rewards",
         "operationId": "getNodeRewards",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "NodeReward",
