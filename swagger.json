@@ -51,6 +51,23 @@
         ],
         "summary": "Returns gravity node common statistics",
         "operationId": "getCommonStats",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
+            "name": "page",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "CommonStats",
@@ -84,6 +101,23 @@
         ],
         "summary": "Returns all available gravity nebulas",
         "operationId": "getAllNebulas",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
+            "name": "page",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Nebula",
@@ -120,6 +154,23 @@
         ],
         "summary": "Returns all available gravity nodes",
         "operationId": "getAllNodes",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed.",
+            "name": "page",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Node",
@@ -222,7 +273,8 @@
         "status",
         "description",
         "score",
-        "target_chain"
+        "target_chain",
+        "regularity"
       ],
       "properties": {
         "description": {
@@ -244,6 +296,12 @@
             "$ref": "#/definitions/Node"
           },
           "x-go-name": "NodesUsing"
+        },
+        "regularity": {
+          "description": "Data feed subscription charge regularity\nRepresents minutes. For i.g. 1440 - one day",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Regularity"
         },
         "score": {
           "description": "the score of the nebula",

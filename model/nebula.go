@@ -50,4 +50,16 @@ type Nebula struct {
 
 	Extractor *IExtractor `json:"extractor"`
 	NodesUsing []Node `json:"nodes_using"`
+
+	// Data feed subscription charge regularity
+	// Represents minutes. For i.g. 1440 - one day
+	//
+	// required: true
+	Regularity int64 `json:"regularity"`
+}
+
+func (nebula *Nebula) Matches (str string) bool {
+	fieldValues := []string { nebula.Name, nebula.Description }
+
+	return MatchStrList(fieldValues, str)
 }

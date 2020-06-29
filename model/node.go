@@ -50,3 +50,9 @@ type NodeHistoryRecord struct {
 	Status CommonStatus `json:"status"`
 	Timestamp time.Time `json:"time"`
 }
+
+func (node *Node) Matches (str string) bool {
+	fieldValues := []string { node.Name, node.Description }
+
+	return MatchStrList(fieldValues, str)
+}

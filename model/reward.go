@@ -8,3 +8,8 @@ type NodeReward struct {
 	Currency string `json:"currency"`
 }
 
+func (reward *NodeReward) Matches (str string) bool {
+	fieldValues := []string { reward.Currency }
+
+	return MatchStrList(fieldValues, str)
+}

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"../model"
+	petname "github.com/dustinkirkland/golang-petname"
 	"time"
 )
 
@@ -55,7 +56,6 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		NebulasUsing:  nil,
 	}
 
-
 	var demoNebula = model.Nebula{
 		Name:            "Demo Nebula",
 		Status:          model.NebulaPendingStatus,
@@ -63,6 +63,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Score:           50,
 		SubscriptionFee: 10 * WavesDecimal,
 		TargetChain:     model.WAVES_TARGET_CHAIN,
+		Regularity:		 1440,
 		Extractor:       nil,
 		NodesUsing:      nil,
 	}
@@ -72,6 +73,18 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Description:     "",
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
+		Regularity:		 1440,
+		SubscriptionFee: 10 * EthDecimal,
+		Extractor:       nil,
+		NodesUsing:      nil,
+	}
+	var coinbaseNebula = model.Nebula{
+		Name:            "Coinbase Nebula",
+		Status:          model.NebulaActiveStatus,
+		Description:     "Coinbase",
+		Score:           100,
+		TargetChain:     model.ETH_TARGET_CHAIN,
+		Regularity:		 1440,
 		SubscriptionFee: 10 * EthDecimal,
 		Extractor:       nil,
 		NodesUsing:      nil,
@@ -80,16 +93,61 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 	nebulaList := []model.Nebula {
 		AddNodes(demoNebula, demoNode),
 		AddNodes(binanceNebula, binanceNode),
+		coinbaseNebula,
 	}
+	nebulaList = append(nebulaList, *DuplicateToSimilarNebulas(&coinbaseNebula, 100)...)
 
 	nodeList := []model.Node {
 		AddNebulas(demoNode, demoNebula),
 		AddNebulas(binanceNode, binanceNebula),
 		huobiNode,
 	}
+	nodeList = append(nodeList, *DuplicateToSimilarNodes(&huobiNode, 100)...)
 
 	return &nebulaList, &nodeList
 }
+
+func DuplicateToSimilarNebulas(nebula *model.Nebula, amount int) *[]model.Nebula {
+	var arr []model.Nebula
+
+	index := 0
+
+	for {
+		if index >= amount { break }
+
+		newNebula := *nebula
+		newNebula.Score += model.Score(5 * index)
+		newNebula.Description = petname.Generate(2, " ")
+
+		arr = append(arr, newNebula)
+
+		index++
+	}
+
+	return &arr
+}
+
+
+func DuplicateToSimilarNodes(node *model.Node, amount int) *[]model.Node {
+	var arr []model.Node
+
+	index := 0
+
+	for {
+		if index >= amount { break }
+
+		newNode := *node
+		newNode.Score += 5
+		newNode.Description = petname.Generate(2, " ")
+
+		arr = append(arr, newNode)
+
+		index++
+	}
+
+	return &arr
+}
+
 
 func GetCommonStatsMockup() *model.CommonStats {
 	stats := model.CommonStats{

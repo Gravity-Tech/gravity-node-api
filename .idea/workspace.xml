@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="341b3c7d-a35d-4303-8ac4-5354761459f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/param.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/parameter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/responsecontroller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gravity-node-api-mockup" beforeDir="false" afterPath="$PROJECT_DIR$/gravity-node-api-mockup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/extractor.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/extractor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/nebula.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/nebula.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/node.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/reward.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/reward.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mockup.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mockup.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,10 +146,10 @@
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="229" y="77" key="SettingsEditor/0.23.1440.831@0.23.1440.831" timestamp="1593180376770" />
-    <state x="385" y="178" width="670" height="676" key="search.everywhere.popup" timestamp="1593181414866">
+    <state x="385" y="178" width="670" height="676" key="search.everywhere.popup" timestamp="1593436485851">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
-    <state x="385" y="178" width="670" height="676" key="search.everywhere.popup/0.23.1440.831@0.23.1440.831" timestamp="1593181414866" />
+    <state x="385" y="178" width="670" height="676" key="search.everywhere.popup/0.23.1440.831@0.23.1440.831" timestamp="1593436485851" />
     <state x="450" y="357" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1593428599282">
       <screen x="0" y="23" width="1440" height="831" />
     </state>

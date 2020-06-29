@@ -7,4 +7,26 @@ type IExtractor interface {
 	mapData(data []RawData) interface{}
 }
 
-type Extractor struct {}
+
+// swagger: model
+type Extractor struct {
+	// Data feed tag for distinct usage
+	//
+	// required: true
+	DataFeedTag string `json:"data_feed_tag"`
+
+	// Common extractor description
+	//
+	// required: true
+	Description string `json:"description"`
+}
+
+func (e *Extractor) extractData() []RawData {
+	return []RawData{
+		byte(0),
+	}
+}
+
+func (e *Extractor) mapData() interface{} {
+	return 0
+}
