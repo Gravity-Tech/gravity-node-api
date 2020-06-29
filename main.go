@@ -10,8 +10,8 @@
 // there are no TOS at this moment, use at your own risk we take no responsibility
 //
 //     Schemes: http, https
-//     Host: node-ui.gravityhub.org
-//     BasePath: /v1
+//     Host: node.gravityhub.org:8090
+//     BasePath: /
 //     Version: 1.0
 //     License: MIT http://opensource.org/licenses/MIT
 //     Contact: venlab.dev <shamil@venlab.dev> https://venlab.dev
