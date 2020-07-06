@@ -145,6 +145,31 @@
         ],
         "summary": "Returns gravity node mockup actions history",
         "operationId": "getNodeActionHistory",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
         "responses": {
           "200": {
             "description": "NodeHistoryRecord",

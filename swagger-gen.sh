@@ -3,7 +3,7 @@
 
 out_ext=$1
 
-if [ -n "$out" ]
+if [ -z "$1" ]
 then
   out_ext="json"
 fi
