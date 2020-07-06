@@ -1,5 +1,7 @@
 package model
 
+import "../abstract"
+
 // Target chain
 
 type ChainType = int
@@ -48,7 +50,7 @@ type Nebula struct {
 
 	SubscriptionFee uint64 `json:"subscription_fee"`
 
-	Extractor *IExtractor `json:"extractor"`
+	Extractor *abstract.IExtractor `json:"extractor"`
 	NodesUsing []Node `json:"nodes_using"`
 
 	// Data feed subscription charge regularity

@@ -1,11 +1,11 @@
 package controller
 
 import (
+	"../model"
+	"../utils"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"../model"
-	"../utils"
 )
 
 type Controller interface {}
