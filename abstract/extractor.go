@@ -30,26 +30,6 @@ type IExtractor interface {
 	- It's just an example for extractor as external service.
 */
 
-type binancePriceExtractor struct {}
-type binancePrice = int
-
-func (e *binancePriceExtractor) DataFeedTag() string {
-	return "binance-price_WAVES_BTC"
-}
-
-func (e *binancePriceExtractor) Description() string {
-	return "This extractor represents WAVES_BTC binance price"
-}
-
-func (e *binancePriceExtractor) extractData() []RawData {
-	return []RawData {0,1}
-}
-
-// Return value is decimal
-func (e *binancePriceExtractor) mapData(data []RawData) binancePrice {
-	currentPrice := binancePrice(data[0])
-	return currentPrice
-}
 
 type commonWeatherDataExtractor struct {}
 type commonWeatherData struct {
