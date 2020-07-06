@@ -188,3 +188,54 @@ func GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+
+// swagger:route GET /nodes/actions/history Nodes getNodeActionHistory
+//
+// Returns gravity node mockup actions history
+//
+// This will show all gravity node mockup actions history list
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []NodeHistoryRecord
+func GetNodeActionsHistory(w http.ResponseWriter, req *http.Request) {
+	rewards := utils.GetNodeActionsHistoryMockup()
+	result := make([]model.NodeHistoryRecord, DefaultItemsPerPage)
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	for _, reward := range *rewards {
+		if queryString == "" {
+			result = *rewards
+			break
+		}
+
+		if reward.Matches(queryString) {
+			result = append(result, reward)
+		}
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(result), itemsPerPage, pageIndex)
+	result = (result)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(&result)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}

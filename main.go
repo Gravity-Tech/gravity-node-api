@@ -72,7 +72,7 @@ func main () {
 	http.HandleFunc(router.GetAllNodes, controller.GetAllNodes)
 	http.HandleFunc(router.GetCommonStats, controller.GetCommonStats)
 	http.HandleFunc(router.GetNodeRewards, controller.GetNodeRewardsList)
-	http.HandleFunc(router.GetNodeActionsHistory, controller.GetAllNodes)
+	http.HandleFunc(router.GetNodeActionsHistory, controller.GetNodeActionsHistory)
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)

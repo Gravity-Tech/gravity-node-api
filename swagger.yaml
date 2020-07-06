@@ -1,0 +1,420 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  Asset:
+    properties:
+      amount:
+        type: string
+        x-go-name: Amount
+      decimals:
+        format: int64
+        type: integer
+        x-go-name: Decimals
+      name:
+        type: string
+        x-go-name: Name
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  CommonStats:
+    properties:
+      data_feeds:
+        format: uint64
+        type: integer
+        x-go-name: DataFeeds
+      nodes_count:
+        format: uint64
+        type: integer
+        x-go-name: NodesCount
+      pulses:
+        format: uint64
+        type: integer
+        x-go-name: Pulses
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  IExtractor:
+    properties:
+      DataFeedTag:
+        type: string
+      Description:
+        type: string
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/abstract
+  Nebula:
+    properties:
+      description:
+        description: the description of the nebula
+        type: string
+        x-go-name: Description
+      extractor:
+        $ref: '#/definitions/IExtractor'
+      name:
+        description: the name of the nebula
+        type: string
+        x-go-name: Name
+      nodes_using:
+        items:
+          $ref: '#/definitions/Node'
+        type: array
+        x-go-name: NodesUsing
+      regularity:
+        description: |-
+          Data feed subscription charge regularity
+          Represents minutes. For i.g. 1440 - one day
+        format: int64
+        type: integer
+        x-go-name: Regularity
+      score:
+        description: the score of the nebula
+        format: uint16
+        type: integer
+        x-go-name: Score
+      status:
+        description: the status of the nebula
+        format: uint64
+        type: integer
+        x-go-name: Status
+      subscription_fee:
+        format: uint64
+        type: integer
+        x-go-name: SubscriptionFee
+      target_chain:
+        description: |-
+          the target chain of the nebula
+          recently allowed: WAVES, ETH
+        format: int64
+        type: integer
+        x-go-name: TargetChain
+    required:
+    - name
+    - status
+    - description
+    - score
+    - target_chain
+    - regularity
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  Node:
+    properties:
+      contacts:
+        $ref: '#/definitions/NodeContacts'
+      deposit_amount:
+        format: int64
+        type: integer
+        x-go-name: DepositAmount
+      deposit_chain:
+        format: int64
+        type: integer
+        x-go-name: DepositChain
+      description:
+        type: string
+        x-go-name: Description
+      joined_at:
+        format: int64
+        type: integer
+        x-go-name: JoinedAt
+      locked_until:
+        format: int64
+        type: integer
+        x-go-name: LockedUntil
+      name:
+        type: string
+        x-go-name: Name
+      nebulas_using:
+        items:
+          $ref: '#/definitions/Nebula'
+        type: array
+        x-go-name: NebulasUsing
+      score:
+        format: uint16
+        type: integer
+        x-go-name: Score
+      socials:
+        $ref: '#/definitions/NodeSocials'
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  NodeContacts:
+    properties:
+      website:
+        type: string
+        x-go-name: Website
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  NodeHistoryRecord:
+    properties:
+      asset:
+        $ref: '#/definitions/Asset'
+      name:
+        type: string
+        x-go-name: Name
+      status:
+        format: uint64
+        type: integer
+        x-go-name: Status
+      time:
+        format: int64
+        type: integer
+        x-go-name: Timestamp
+      type:
+        format: int64
+        type: integer
+        x-go-name: Type
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  NodeReward:
+    properties:
+      amount:
+        format: uint64
+        type: integer
+        x-go-name: Amount
+      currency:
+        type: string
+        x-go-name: Currency
+      decimals:
+        format: int64
+        type: integer
+        x-go-name: Decimals
+      timestamp:
+        format: int64
+        type: integer
+        x-go-name: Timestamp
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+  NodeSocials:
+    properties:
+      fb:
+        type: string
+        x-go-name: Facebook
+      linkedin:
+        type: string
+        x-go-name: Linked
+      tg:
+        type: string
+        x-go-name: Telegram
+      twitter:
+        type: string
+        x-go-name: Twitter
+    type: object
+    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+host: node.gravityhub.org:8090
+info:
+  contact:
+    email: shamil@venlab.dev
+    name: venlab.dev
+    url: https://venlab.dev
+  description: |-
+    the purpose of this application is to provide an application
+    that is using plain go code to define an API
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+  termsOfService: there are no TOS at this moment, use at your own risk we take no
+    responsibility
+  title: Gravity Node API.
+  version: "1.0"
+paths:
+  /common/stats:
+    get:
+      consumes:
+      - application/json
+      description: This will show all gravity common stats
+      operationId: getCommonStats
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: CommonStats
+          schema:
+            $ref: '#/definitions/CommonStats'
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns gravity node common statistics
+      tags:
+      - Common
+  /nebulas/all:
+    get:
+      consumes:
+      - application/json
+      description: This will show all available gravity nebulas
+      operationId: getAllNebulas
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
+      - description: |-
+          a CurrentPageParam represents current page
+          Only positive integers allowed. Default is 1
+        format: uint64
+        in: query
+        name: page
+        type: integer
+        x-go-name: Page
+      - description: |-
+          an ItemsPerPageParam represents items count per page
+          Only positive integers allowed. Default is 12
+        format: uint64
+        in: query
+        name: items
+        type: integer
+        x-go-name: Items
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Nebula
+          schema:
+            items:
+              $ref: '#/definitions/Nebula'
+            type: array
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns all available gravity nebulas
+      tags:
+      - Nebulas
+  /nodes/actions/history:
+    get:
+      consumes:
+      - application/json
+      description: This will show all gravity node mockup actions history list
+      operationId: getNodeActionHistory
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: NodeHistoryRecord
+          schema:
+            items:
+              $ref: '#/definitions/NodeHistoryRecord'
+            type: array
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns gravity node mockup actions history
+      tags:
+      - Nodes
+  /nodes/all:
+    get:
+      consumes:
+      - application/json
+      description: This will show all available gravity nodes
+      operationId: getAllNodes
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
+      - description: |-
+          a CurrentPageParam represents current page
+          Only positive integers allowed. Default is 1
+        format: uint64
+        in: query
+        name: page
+        type: integer
+        x-go-name: Page
+      - description: |-
+          an ItemsPerPageParam represents items count per page
+          Only positive integers allowed. Default is 12
+        format: uint64
+        in: query
+        name: items
+        type: integer
+        x-go-name: Items
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Node
+          schema:
+            items:
+              $ref: '#/definitions/Node'
+            type: array
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns all available gravity nodes
+      tags:
+      - Nodes
+  /nodes/rewards/all:
+    get:
+      consumes:
+      - application/json
+      description: This will show all gravity node mockup rewards list
+      operationId: getNodeRewards
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
+      - description: |-
+          a CurrentPageParam represents current page
+          Only positive integers allowed. Default is 1
+        format: uint64
+        in: query
+        name: page
+        type: integer
+        x-go-name: Page
+      - description: |-
+          an ItemsPerPageParam represents items count per page
+          Only positive integers allowed. Default is 12
+        format: uint64
+        in: query
+        name: items
+        type: integer
+        x-go-name: Items
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: NodeReward
+          schema:
+            items:
+              $ref: '#/definitions/NodeReward'
+            type: array
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns gravity node mockup rewards
+      tags:
+      - Nodes
+produces:
+- application/json
+schemes:
+- http
+- https
+security:
+- api_key: []
+securityDefinitions:
+  api_key:
+    in: header
+    name: KEY
+    type: apiKey
+swagger: "2.0"
+x-meta-array:
+- value1
+- value2
+x-meta-array-obj:
+- name: obj
+  value: field
+x-meta-value: value

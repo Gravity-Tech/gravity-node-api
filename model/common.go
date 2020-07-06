@@ -6,6 +6,7 @@ type CommonStatus = uint
 
 const (
 	CommonPendingStatus CommonStatus = iota
+	CommonFailedStatus
 	CommonDoneStatus
 )
 

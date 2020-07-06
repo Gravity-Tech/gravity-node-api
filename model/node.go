@@ -1,7 +1,7 @@
 package model
 
-import "time"
 
+// NodeActionType
 type NodeActionType = int
 
 const (
@@ -42,17 +42,24 @@ type Node struct {
 	Socials NodeSocials `json:"socials"`
 }
 
+func (node *Node) Matches (str string) bool {
+	fieldValues := []string { node.Name, node.Description }
+
+	return MatchStrList(fieldValues, str)
+}
+
+
 // swagger:model
 type NodeHistoryRecord struct {
 	Name string  `json:"name"`
 	Type NodeActionType `json:"type"`
 	Asset Asset `json:"asset"`
 	Status CommonStatus `json:"status"`
-	Timestamp time.Time `json:"time"`
+	Timestamp int64 `json:"time"`
 }
 
-func (node *Node) Matches (str string) bool {
-	fieldValues := []string { node.Name, node.Description }
+func (record *NodeHistoryRecord) Matches (str string) bool {
+	fieldValues := []string { record.Name, record.Asset.Name }
 
 	return MatchStrList(fieldValues, str)
 }

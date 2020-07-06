@@ -122,6 +122,42 @@
         }
       }
     },
+    "/nodes/actions/history": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all gravity node mockup actions history list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nodes"
+        ],
+        "summary": "Returns gravity node mockup actions history",
+        "operationId": "getNodeActionHistory",
+        "responses": {
+          "200": {
+            "description": "NodeHistoryRecord",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NodeHistoryRecord"
+              }
+            }
+          }
+        }
+      }
+    },
     "/nodes/all": {
       "get": {
         "security": [
@@ -288,7 +324,15 @@
     },
     "IExtractor": {
       "type": "object",
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "properties": {
+        "DataFeedTag": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      },
+      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/abstract"
     },
     "Nebula": {
       "type": "object",
@@ -431,8 +475,8 @@
           "x-go-name": "Status"
         },
         "time": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "int64",
           "x-go-name": "Timestamp"
         },
         "type": {

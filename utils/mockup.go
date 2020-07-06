@@ -199,3 +199,59 @@ func GetNodeRewardsListMockup() *[]model.NodeReward {
 
 	return &rewards
 }
+
+//
+//NodeDataSent NodeActionType = iota
+//NodeConsensusReached
+//NodeAssetsReceived
+//NodeVoteReceived
+func GetNodeActionsHistoryMockup() *[]model.NodeHistoryRecord {
+	list := []model.NodeHistoryRecord {
+		model.NodeHistoryRecord{
+			Name:      "A",
+			Type:      model.NodeDataSent,
+			Asset:     model.Asset{
+				Name:     "WAVES",
+				Decimals: WavesDecimal,
+				Amount:   "534",
+			},
+			Status:    model.CommonFailedStatus,
+			Timestamp: time.Time{}.Unix(),
+		},
+		model.NodeHistoryRecord{
+			Name:      "B",
+			Type:      model.NodeConsensusReached,
+			Asset:     model.Asset{
+				Name:     "ETH",
+				Decimals: EthDecimal,
+				Amount:   "123",
+			},
+			Status:    model.CommonDoneStatus,
+			Timestamp: time.Time{}.Unix(),
+		},
+		model.NodeHistoryRecord{
+			Name:      "C",
+			Type:      model.NodeAssetsReceived,
+			Asset:     model.Asset{
+				Name:     "WAVES",
+				Decimals: WavesDecimal,
+				Amount:   "130259",
+			},
+			Status:    model.CommonPendingStatus,
+			Timestamp: time.Time{}.Unix(),
+		},
+		model.NodeHistoryRecord{
+			Name:      "D",
+			Type:      model.NodeVoteReceived,
+			Asset:     model.Asset{
+				Name:     "ETH",
+				Decimals: EthDecimal,
+				Amount:   "5",
+			},
+			Status:    model.CommonFailedStatus,
+			Timestamp: time.Time{}.Unix(),
+		},
+	}
+
+	return &list
+}
