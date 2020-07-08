@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"../model"
-	"../utils"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"encoding/json"
 	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
 	"net/http"
 )
 

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"../model"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
 	petname "github.com/dustinkirkland/golang-petname"
 	"time"
 )

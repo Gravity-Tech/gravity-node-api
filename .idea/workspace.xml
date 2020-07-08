@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="341b3c7d-a35d-4303-8ac4-5354761459f9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migration/init_common_image.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migration/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/parameter.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/parameter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swagger-gen.sh" beforeDir="false" afterPath="$PROJECT_DIR$/swagger-gen.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gravity-node-api-mockup" beforeDir="false" afterPath="$PROJECT_DIR$/gravity-node-api-mockup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/nebula.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/nebula.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mockup.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mockup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +70,7 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoProjectSettingsConfigurable" />
   </component>
@@ -100,13 +109,18 @@
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="320" y="104" key="#GOROOT/0.23.1440.831@0.23.1440.831" timestamp="1593180146206" />
+    <state x="320" y="115" key="#Go_Modules_(vgo)" timestamp="1594225766153">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="115" key="#Go_Modules_(vgo)/0.0.1440.900@0.0.1440.900" timestamp="1594225766153" />
     <state x="184" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593181026727">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="184" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.831@0.23.1440.831" timestamp="1593181026727" />
-    <state x="463" y="248" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593430040384">
-      <screen x="0" y="23" width="1440" height="831" />
+    <state x="463" y="244" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594212249778">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="463" y="244" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1594212249778" />
     <state x="463" y="248" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.831@0.23.1440.831" timestamp="1593430040384" />
     <state x="429" y="89" key="#go_build_gravity-node-api-mockup" timestamp="1593180812514">
       <screen x="0" y="23" width="1440" height="831" />
@@ -136,13 +150,18 @@
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="229" y="77" key="SettingsEditor/0.23.1440.831@0.23.1440.831" timestamp="1593180376770" />
+    <state x="379" y="207" width="681" height="486" key="find.popup" timestamp="1594226901820">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="379" y="207" width="681" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1594226901820" />
     <state x="385" y="178" width="670" height="676" key="search.everywhere.popup" timestamp="1593436485851">
       <screen x="0" y="23" width="1440" height="831" />
     </state>
     <state x="385" y="178" width="670" height="676" key="search.everywhere.popup/0.23.1440.831@0.23.1440.831" timestamp="1593436485851" />
-    <state x="450" y="357" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1593428599282">
-      <screen x="0" y="23" width="1440" height="831" />
+    <state x="450" y="362" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1594226894301">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="450" y="362" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1440.900@0.0.1440.900" timestamp="1594226894301" />
     <state x="450" y="357" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.23.1440.831@0.23.1440.831" timestamp="1593428599282" />
   </component>
 </project>

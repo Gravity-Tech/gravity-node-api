@@ -44,11 +44,11 @@
 package main
 
 import (
-	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
 	"flag"
+	"fmt"
 	"net/http"
-	"./router"
-	"./controller"
 )
 
 var port string

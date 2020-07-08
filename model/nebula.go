@@ -1,6 +1,6 @@
 package model
 
-import "../abstract"
+import "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/abstract"
 
 // Target chain
 
