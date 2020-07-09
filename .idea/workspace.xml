@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="341b3c7d-a35d-4303-8ac4-5354761459f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migration/init_common_image.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migration/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrate.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/1_common_init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gravity-node-api-mockup" beforeDir="false" afterPath="$PROJECT_DIR$/gravity-node-api-mockup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/nebula.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/nebula.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mockup.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mockup.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +92,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
