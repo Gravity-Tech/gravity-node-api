@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/go-pg/migrations"
+	""
 )
 
 func init () {
@@ -13,7 +14,8 @@ func init () {
 			fmt.Printf("creating %v table...\n", tableName)
 			_, err := db.Exec(fmt.Sprintf(
 				`CREATE TABLE %[1]v (
-					
+					foo text,
+					bar int
 				);
 				`, tableName))
 			return err
