@@ -1,9 +1,9 @@
 package main
 
 import (
-	"../utils"
 	"flag"
 	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"github.com/go-pg/migrations"
 	"github.com/go-pg/pg"
 	"os"
@@ -35,6 +35,7 @@ func main() {
 	})
 
 	oldVersion, newVersion, err := migrations.Run(db, flag.Args()...)
+
 	if err != nil {
 		exitf(err.Error())
 	}

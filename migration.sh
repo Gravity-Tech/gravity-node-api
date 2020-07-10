@@ -1,11 +1,11 @@
 #!/bin/bash
 
-base_dir='migrations'
+base_dir='./migrations'
 migration_main=''
 
 update_migration_main () {
     # shellcheck disable=SC2116
-    migration_main="$(echo $base_dir)/main.go"
+    migration_main="$(echo $base_dir)/"
 }
 
 init_migration () {
@@ -17,7 +17,6 @@ reset_go_migrations () {
 }
 
 run_go_migrations () {
-    init_migration
     go run "$migration_main" up
 }
 
@@ -29,9 +28,9 @@ main () {
     while [ -n "$1" ]
     do
         case "$1" in
-            --reset-migration) reset_go_migrations ;;
-            --run-migration) run_go_migrations ;;
-            --init-migration) init_migration ;;
+            --reset) reset_go_migrations ;;
+            --run) run_go_migrations ;;
+            --init) init_migration ;;
         esac
         shift;
     done

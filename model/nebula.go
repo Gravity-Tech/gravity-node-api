@@ -1,7 +1,5 @@
 package model
 
-import "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/abstract"
-
 // Target chain
 
 type ChainType = int
@@ -50,7 +48,7 @@ type Nebula struct {
 
 	SubscriptionFee uint64 `json:"subscription_fee"`
 
-	Extractor *abstract.IExtractor `json:"extractor"`
+	//Extractor *abstract.IExtractor `json:"extractor"`
 	NodesUsing []Node `json:"nodes_using"`
 
 	// Data feed subscription charge regularity
