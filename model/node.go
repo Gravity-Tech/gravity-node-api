@@ -24,21 +24,26 @@ type NodeContacts struct {
 	Website string  `json:"website"`
 }
 
+type NodeContactInfo struct {
+	NodeSocials
+	NodeContacts
+}
+
 // swagger:model
 type Node struct {
 	Name string  `json:"name"`
 	Description string  `json:"description"`
 	Score Score `json:"score"`
 
-	DepositChain ChainType `json:"deposit_chain"`
-	DepositAmount int64 `json:"deposit_amount"`
+	DepositChain ChainType `json:"deposit_chain",pg:"deposit_chain"`
+	DepositAmount int64 `json:"deposit_amount",pg:"deposit_amount"`
 
-	JoinedAt int64 `json:"joined_at"`
-	LockedUntil int64 `json:"locked_until"` // JoinedAt > LockedUntil - node is active
+	JoinedAt int64 `json:"joined_at",pg:"joined_at"`
+	LockedUntil int64 `json:"locked_until",pg:"locked_until"` // JoinedAt > LockedUntil - node is active
 
-	NebulasUsing []Nebula `json:"nebulas_using"`
+	NebulasUsing []Nebula `json:"nebulas_using",pg:"nebulas_using"`
 
-	Сontacts NodeContacts `json:"contacts"`
+	Contacts NodeContacts `json:"contacts"`
 	Socials NodeSocials `json:"socials"`
 }
 

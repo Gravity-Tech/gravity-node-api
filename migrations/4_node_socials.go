@@ -13,9 +13,17 @@ func init () {
 		func(db migrations.DB) error {
 			fmt.Printf("creating %v table...\n", tableName)
 			_, err := db.Exec(fmt.Sprintf(
-				`CREATE TABLE %[1]v (
-					foo text,
-					bar int
+				`
+				CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+				CREATE TABLE %[1]v (
+					internal_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+
+					tg text,
+					fb text,
+					linkedin text,
+					twitter text,
+					website text
 				);
 				`, tableName))
 			return err

@@ -44,12 +44,12 @@ type Nebula struct {
 	// recently allowed: WAVES, ETH
 	//
 	// required: true
-	TargetChain ChainType `json:"target_chain"`
+	TargetChain ChainType `json:"target_chain",pg:"target_chain"`
 
-	SubscriptionFee uint64 `json:"subscription_fee"`
+	SubscriptionFee uint64 `json:"subscription_fee",pg:"subscription_fee"`
 
 	//Extractor *abstract.IExtractor `json:"extractor"`
-	NodesUsing []Node `json:"nodes_using"`
+	NodesUsing []Node `json:"nodes_using",pg:"nodes_using"`
 
 	// Data feed subscription charge regularity
 	// Represents minutes. For i.g. 1440 - one day
