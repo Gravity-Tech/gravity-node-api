@@ -21,9 +21,20 @@ func (dbc *DBController) PersistMockup () {
 
 	dbc.persistNebulas(nebulas)
 	dbc.persistNodes(nodes)
+}
 
-	common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nebulas)
-	common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nodes)
+func (dbc *DBController) RefreshNebulasAndNodesMaterializedView () {
+	queries := []string {
+		common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nebulas),
+		common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nodes),
+	}
+
+	for _, query := range queries {
+		_, err := dbc.DB.Query(nil, query)
+		if err != nil {
+			fmt.Printf("Error on refresh: %v;\n", err)
+		}
+	}
 }
 
 func (dbc *DBController) errorHandle (prefix string, err error) {
@@ -77,8 +88,10 @@ func (dbc *DBController) ExactNode (address string) *model.Node {
 
 	destination := dbc.mapTableToMaterializedView(model.DefaultExtendedDBTableNames.Nodes)
 
-	_, err := dbc.DB.Query(&node, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
+	result, err := dbc.DB.Query(&node, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
 	dbc.errorHandle("ExactNode", err)
+
+	if result.RowsReturned() == 0 { return nil }
 
 	return &node
 }
@@ -88,8 +101,10 @@ func (dbc *DBController) ExactNebula (address string) *model.Nebula {
 
 	destination := dbc.mapTableToMaterializedView(model.DefaultExtendedDBTableNames.Nebulas)
 
-	_, err := dbc.DB.Query(&nebula, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
+	result, err := dbc.DB.Query(&nebula, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
 	dbc.errorHandle("ExactNebula", err)
+
+	if result.RowsReturned() == 0 { return nil }
 
 	return &nebula
 }

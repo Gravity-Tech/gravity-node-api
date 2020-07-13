@@ -44,10 +44,10 @@
 package main
 
 import (
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
 	"flag"
 	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"net/http"
 )
@@ -71,9 +71,16 @@ func init() {
 func main () {
 	db := &controller.DBController{ DB: utils.ConnectToPG() }
 
+	ch := make(chan int, 1)
 	if shouldFill != "0" {
+		ch <- 0
 		go db.PersistMockup()
+		<- ch
 	}
+
+	ch <- 0
+	go db.RefreshNebulasAndNodesMaterializedView()
+	<- ch
 
 	responseController := &controller.ResponseController{}
 	responseController.DBControllerDelegate = db
