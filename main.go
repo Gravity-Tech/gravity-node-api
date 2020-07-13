@@ -80,6 +80,7 @@ func main () {
 
 	http.HandleFunc("/hello", headers)
 	http.HandleFunc(router.GetAllNebulas, responseController.GetAllNebulas)
+	http.HandleFunc(router.GetExactNebula, responseController.GetExactNebula)
 
 
 	http.HandleFunc(router.GetNodeRewards, responseController.GetNodeRewardsList)

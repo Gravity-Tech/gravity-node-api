@@ -34,6 +34,10 @@ definitions:
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Nebula:
     properties:
+      address:
+        description: the address of the nebula SC
+        type: string
+        x-go-name: Address
       description:
         description: the description of the nebula
         type: string
@@ -76,6 +80,7 @@ definitions:
         type: integer
         x-go-name: TargetChain
     required:
+    - address
     - name
     - status
     - description
@@ -86,6 +91,10 @@ definitions:
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Node:
     properties:
+      address:
+        description: the address of the node
+        type: string
+        x-go-name: Address
       deposit_amount:
         format: int64
         type: integer
@@ -118,6 +127,8 @@ definitions:
         format: uint16
         type: integer
         x-go-name: Score
+    required:
+    - address
     type: object
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   NodeContacts:
@@ -360,6 +371,29 @@ paths:
       security:
       - api_key: []
       summary: Returns all available gravity nodes
+      tags:
+      - Nodes
+  /nodes/exact:
+    get:
+      consumes:
+      - application/json
+      description: This will show all gravity node mockup actions history list
+      operationId: getExactNode
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Node
+          schema:
+            $ref: '#/definitions/Node'
+        "404":
+          $ref: '#/responses/null'
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns exact node by name
       tags:
       - Nodes
   /nodes/rewards/all:

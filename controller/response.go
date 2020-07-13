@@ -247,7 +247,6 @@ func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *
 //
 // Returns exact node by name
 //
-// This will show all gravity node mockup actions history list
 //
 //     Consumes:
 //     - application/json
@@ -266,5 +265,45 @@ func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *
 //       200: Node
 //		 404: null
 func (rc *ResponseController) GetExactNode (w http.ResponseWriter, req *http.Request) {
+	address := req.URL.Query().Get("q")
+	exactNode := rc.DBControllerDelegate.ExactNode(address)
 
+	bytes, _ := json.Marshal(exactNode)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+
+
+// swagger:route GET /nebulas/exact Nodes getExactNebula
+//
+// Returns exact Nebula by address
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: Nebula
+//		 404: null
+func (rc *ResponseController) GetExactNebula (w http.ResponseWriter, req *http.Request) {
+	address := req.URL.Query().Get("q")
+	exactNebula := rc.DBControllerDelegate.ExactNebula(address)
+
+	bytes, _ := json.Marshal(exactNebula)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
 }

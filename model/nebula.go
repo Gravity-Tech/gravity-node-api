@@ -71,7 +71,7 @@ func (nebula *Nebula) AddNodes (nodes ...Node) {
 	nebula.NodesUsing = []string {}
 
 	for _, node := range nodes {
-		nebula.NodesUsing = append(nebula.NodesUsing, node.Name)
+		nebula.NodesUsing = append(nebula.NodesUsing, node.Address)
 	}
 }
 

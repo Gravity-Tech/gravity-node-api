@@ -1,7 +1,7 @@
 package model
 
 
-// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory
+// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory getExactNebula getExactNode
 type QueryParam struct {
 	// a QueryParam acts like a search string for fields.
 	// Use as a regexp expression.

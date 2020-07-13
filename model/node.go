@@ -58,7 +58,7 @@ func (node *Node) AddNebulas (nebulas ...Nebula) {
 
 	for _, nebula := range nebulas {
 		//node.NebulasUsing = append(node.NebulasUsing, nebula)
-		node.NebulasUsing = append(node.NebulasUsing, nebula.Name)
+		node.NebulasUsing = append(node.NebulasUsing, nebula.Address)
 	}
 }
 

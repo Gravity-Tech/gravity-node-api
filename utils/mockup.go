@@ -29,7 +29,7 @@ func stringify(any interface{}) string {
 	return fmt.Sprintf("%v", any)
 }
 func mockupRandomAddress() string {
-	return petname.Generate(20, ";")
+	return petname.Generate(20, "_")
 }
 
 // Mockup functions
