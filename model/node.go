@@ -41,10 +41,20 @@ type Node struct {
 	JoinedAt int64 `json:"joined_at",pg:"joined_at"`
 	LockedUntil int64 `json:"locked_until",pg:"locked_until"` // JoinedAt > LockedUntil - node is active
 
-	NebulasUsing []Nebula `json:"nebulas_using",pg:"nebulas_using"`
+	//NebulasUsing []Nebula `json:"nebulas_using",pg:"-"`
+	NebulasUsing []string `pg:",array" json:"nebulas_using"`
 
 	//Contacts NodeContacts `json:"contacts"`
 	//Socials NodeSocials `json:"socials"`
+}
+
+func (node *Node) AddNebulas (nebulas ...Nebula) {
+	node.NebulasUsing = []string {}
+
+	for _, nebula := range nebulas {
+		//node.NebulasUsing = append(node.NebulasUsing, nebula)
+		node.NebulasUsing = append(node.NebulasUsing, nebula.Name)
+	}
 }
 
 func (node *Node) Matches (str string) bool {
@@ -68,3 +78,4 @@ func (record *NodeHistoryRecord) Matches (str string) bool {
 
 	return MatchStrList(fieldValues, str)
 }
+

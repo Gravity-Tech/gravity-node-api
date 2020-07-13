@@ -1,14 +1,16 @@
 package controller
 
 import (
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"encoding/json"
 	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"net/http"
 )
 
-type Controller interface {}
+type ResponseController struct {
+	DBControllerDelegate *DBController
+}
 
 func addBaseHeaders (headers http.Header) {
 	headers.Add("Content-Type", "application/json")
@@ -35,8 +37,8 @@ func addBaseHeaders (headers http.Header) {
 //
 //     Responses:
 //       200: []Nebula
-func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
-	nebulasList, _ := utils.GetMockup()
+func (rc *ResponseController) GetAllNebulas(w http.ResponseWriter, req *http.Request) {
+	nebulasList := rc.DBControllerDelegate.AllNebulasList()
 
 	queryString, queryPage, queryItemsPerPage := HandleParams(req)
 
@@ -83,8 +85,8 @@ func GetAllNebulas(w http.ResponseWriter, req *http.Request) {
 //
 //     Responses:
 //       200: []Node
-func GetAllNodes(w http.ResponseWriter, req *http.Request) {
-	_, nodeList := utils.GetMockup()
+func (rc *ResponseController) GetAllNodes(w http.ResponseWriter, req *http.Request) {
+	nodeList := rc.DBControllerDelegate.AllNodesList()
 
 	queryString, queryPage, queryItemsPerPage := HandleParams(req)
 
@@ -129,7 +131,7 @@ func GetAllNodes(w http.ResponseWriter, req *http.Request) {
 //
 //     Responses:
 //       200: CommonStats
-func GetCommonStats(w http.ResponseWriter, req *http.Request) {
+func (rc *ResponseController) GetCommonStats(w http.ResponseWriter, req *http.Request) {
 	stats := utils.GetCommonStatsMockup()
 
 	bytes, _ := json.Marshal(stats)
@@ -160,7 +162,7 @@ func GetCommonStats(w http.ResponseWriter, req *http.Request) {
 //
 //     Responses:
 //       200: []NodeReward
-func GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
+func (rc *ResponseController) GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
 	rewards := utils.GetNodeRewardsListMockup()
 	result := make([]model.NodeReward, DefaultItemsPerPage)
 
@@ -211,7 +213,7 @@ func GetNodeRewardsList(w http.ResponseWriter, req *http.Request) {
 //
 //     Responses:
 //       200: []NodeHistoryRecord
-func GetNodeActionsHistory(w http.ResponseWriter, req *http.Request) {
+func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *http.Request) {
 	rewards := utils.GetNodeActionsHistoryMockup()
 	result := make([]model.NodeHistoryRecord, DefaultItemsPerPage)
 

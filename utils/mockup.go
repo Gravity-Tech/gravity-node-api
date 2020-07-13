@@ -10,14 +10,19 @@ import (
 
 // Pure functions
 func AddNodes (nebula model.Nebula, nodes ...model.Node) model.Nebula {
-	nebula.NodesUsing = append(nebula.NodesUsing, nodes...)
+	nebula.AddNodes(nodes...)
 
 	return nebula
 }
 func AddNebulas (node model.Node, nebulas ...model.Nebula) model.Node {
-	node.NebulasUsing = append(node.NebulasUsing, nebulas...)
+	//node.NebulasUsing = append(node.NebulasUsing, nebulas...)
+	node.AddNebulas(nebulas...)
 
 	return node
+}
+
+func stringifyBigInt(any interface{}) string {
+	return fmt.Sprintf("%d", any)
 }
 
 func stringify(any interface{}) string {
@@ -33,7 +38,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		DepositChain:  model.WAVES_TARGET_CHAIN,
 		DepositAmount: 25,
 		JoinedAt:      time.Time{}.Unix(),
-		NebulasUsing:  nil,
+		//NebulasUsing:  nil,
 	}
 	var binanceNode = model.Node{
 		Name:          "Binance Node #1",
@@ -42,7 +47,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		DepositChain:  model.ETH_TARGET_CHAIN,
 		DepositAmount: 25,
 		JoinedAt:      time.Time{}.Unix(),
-		NebulasUsing:  nil,
+		//NebulasUsing:  nil,
 	}
 	var huobiNode = model.Node{
 		Name:          "LinkPool Node",
@@ -58,7 +63,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		DepositChain:  model.ETH_TARGET_CHAIN,
 		DepositAmount: 25,
 		JoinedAt:      time.Time{}.Unix(),
-		NebulasUsing:  nil,
+		//NebulasUsing:  nil,
 	}
 
 	var demoNebula = model.Nebula{
@@ -66,10 +71,10 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Status:          model.NebulaPendingStatus,
 		Description:     "",
 		Score:           50,
-		SubscriptionFee: stringify(10 * WavesDecimal),
+		SubscriptionFee: stringifyBigInt(10 * WavesDecimal),
 		TargetChain:     model.WAVES_TARGET_CHAIN,
 		Regularity:		 1440,
-		NodesUsing:      nil,
+		//NodesUsing:      nil,
 	}
 	var binanceNebula = model.Nebula{
 		Name:            "Binance Nebula",
@@ -78,8 +83,8 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
 		Regularity:		 1440,
-		SubscriptionFee: stringify(10 * EthDecimal),
-		NodesUsing:      nil,
+		SubscriptionFee: stringifyBigInt(10 * EthDecimal),
+		//NodesUsing:      nil,
 	}
 	var coinbaseNebula = model.Nebula{
 		Name:            "Coinbase Nebula",
@@ -88,8 +93,8 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
 		Regularity:		 1440,
-		SubscriptionFee: stringify(10 * EthDecimal),
-		NodesUsing:      nil,
+		SubscriptionFee: stringifyBigInt(10 * EthDecimal),
+		//NodesUsing:      nil,
 	}
 
 	nebulaList := []model.Nebula {
@@ -118,6 +123,7 @@ func DuplicateToSimilarNebulas(nebula *model.Nebula, amount int) *[]model.Nebula
 		if index >= amount { break }
 
 		newNebula := *nebula
+		newNebula.Name += " " + petname.Name() + " " + petname.Adjective()
 		newNebula.Score += model.Score(5 * index)
 		newNebula.Description = petname.Generate(2, " ")
 
@@ -139,6 +145,7 @@ func DuplicateToSimilarNodes(node *model.Node, amount int) *[]model.Node {
 		if index >= amount { break }
 
 		newNode := *node
+		newNode.Name += " " + petname.Name() + " " + petname.Adjective()
 		newNode.Score += 5
 		newNode.Description = petname.Generate(2, " ")
 

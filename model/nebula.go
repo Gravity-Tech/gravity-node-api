@@ -50,13 +50,24 @@ type Nebula struct {
 	SubscriptionFee SubscriptionFee `json:"subscription_fee",pg:"subscription_fee"`
 
 	//Extractor *abstract.IExtractor `json:"extractor"`
-	NodesUsing []Node `json:"nodes_using",pg:"nodes_using"`
+	//NodesUsing []Node `json:"nodes_using",pg:"-"`
+
+	// Actual pointers
+	NodesUsing []string `pg:",array",json:"nodes_using"`
 
 	// Data feed subscription charge regularity
 	// Represents minutes. For i.g. 1440 - one day
 	//
 	// required: true
 	Regularity int64 `json:"regularity"`
+}
+
+func (nebula *Nebula) AddNodes (nodes ...Node) {
+	nebula.NodesUsing = []string {}
+
+	for _, node := range nodes {
+		nebula.NodesUsing = append(nebula.NodesUsing, node.Name)
+	}
 }
 
 func (nebula *Nebula) Matches (str string) bool {

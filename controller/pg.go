@@ -42,3 +42,20 @@ func (dbc *DBController) persistNodes(nodes *[]model.Node) {
 	}
 }
 
+func (dbc *DBController) AllNebulasList () *[]*model.Nebula {
+	var list []*model.Nebula
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf("SELECT * FROM %v;", model.DefaultExtendedDBTableNames.Nebulas))
+	dbc.errorHandle("AllNebulasList", err)
+
+	return &list
+}
+
+func (dbc *DBController) AllNodesList () *[]*model.Node {
+	var list []*model.Node
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf("SELECT * FROM %v;", model.DefaultExtendedDBTableNames.Nodes))
+	dbc.errorHandle("AllNodesList", err)
+
+	return &list
+}

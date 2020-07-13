@@ -69,17 +69,21 @@ func init() {
 }
 
 func main () {
+	db := &controller.DBController{ DB: utils.ConnectToPG() }
+
 	if shouldFill != "0" {
-		db := &controller.DBController{ DB: utils.ConnectToPG() }
 		go db.PersistMockup()
 	}
 
+	responseController := &controller.ResponseController{}
+	responseController.DBControllerDelegate = db
+
 	http.HandleFunc("/hello", headers)
-	http.HandleFunc(router.GetAllNebulas, controller.GetAllNebulas)
-	http.HandleFunc(router.GetAllNodes, controller.GetAllNodes)
-	http.HandleFunc(router.GetCommonStats, controller.GetCommonStats)
-	http.HandleFunc(router.GetNodeRewards, controller.GetNodeRewardsList)
-	http.HandleFunc(router.GetNodeActionsHistory, controller.GetNodeActionsHistory)
+	http.HandleFunc(router.GetAllNebulas, responseController.GetAllNebulas)
+	http.HandleFunc(router.GetAllNodes, responseController.GetAllNodes)
+	http.HandleFunc(router.GetCommonStats, responseController.GetCommonStats)
+	http.HandleFunc(router.GetNodeRewards, responseController.GetNodeRewardsList)
+	http.HandleFunc(router.GetNodeActionsHistory, responseController.GetNodeActionsHistory)
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
