@@ -2,10 +2,10 @@ package controller
 
 import (
 	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/migrations/common"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"github.com/go-pg/pg"
-	migrations "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/migrations"
 )
 
 type DBController struct {
@@ -22,8 +22,8 @@ func (dbc *DBController) PersistMockup () {
 	dbc.persistNebulas(nebulas)
 	dbc.persistNodes(nodes)
 
-	migrations.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nebulas)
-	migrations.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nodes)
+	common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nebulas)
+	common.UpdateMaterializedViewQuery(model.DefaultExtendedDBTableNames.Nodes)
 }
 
 func (dbc *DBController) errorHandle (prefix string, err error) {
