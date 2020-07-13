@@ -53,7 +53,7 @@ type Nebula struct {
 	//NodesUsing []Node `json:"nodes_using",pg:"-"`
 
 	// Actual pointers
-	NodesUsing []string `pg:",array",json:"nodes_using"`
+	NodesUsing []string `pg:",array" json:"nodes_using"`
 
 	// Data feed subscription charge regularity
 	// Represents minutes. For i.g. 1440 - one day
