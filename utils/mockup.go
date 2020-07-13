@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
 	petname "github.com/dustinkirkland/golang-petname"
 	"time"
@@ -17,6 +18,10 @@ func AddNebulas (node model.Node, nebulas ...model.Nebula) model.Node {
 	node.NebulasUsing = append(node.NebulasUsing, nebulas...)
 
 	return node
+}
+
+func stringify(any interface{}) string {
+	return fmt.Sprintf("%v", any)
 }
 
 // Mockup functions
@@ -61,7 +66,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Status:          model.NebulaPendingStatus,
 		Description:     "",
 		Score:           50,
-		SubscriptionFee: 10 * WavesDecimal,
+		SubscriptionFee: stringify(10 * WavesDecimal),
 		TargetChain:     model.WAVES_TARGET_CHAIN,
 		Regularity:		 1440,
 		NodesUsing:      nil,
@@ -73,7 +78,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
 		Regularity:		 1440,
-		SubscriptionFee: 10 * EthDecimal,
+		SubscriptionFee: stringify(10 * EthDecimal),
 		NodesUsing:      nil,
 	}
 	var coinbaseNebula = model.Nebula{
@@ -83,7 +88,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		Score:           100,
 		TargetChain:     model.ETH_TARGET_CHAIN,
 		Regularity:		 1440,
-		SubscriptionFee: 10 * EthDecimal,
+		SubscriptionFee: stringify(10 * EthDecimal),
 		NodesUsing:      nil,
 	}
 

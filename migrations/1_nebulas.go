@@ -17,13 +17,13 @@ func init () {
 				CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 				CREATE TABLE %[1]v (
-					internal_id uuid DEFAULT uuid_generate_v4 (),
-					name text PRIMARY KEY,
+					internal_id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+					name text,
 					status int,
 					description text,
 					score int,
 					target_chain int,
-					subscription_fee bigint,
+					subscription_fee text,
 
 					nodes_using text[],
 					regularity bigint

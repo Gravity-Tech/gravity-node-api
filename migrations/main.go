@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"github.com/go-pg/migrations"
-	"github.com/go-pg/pg"
 	"os"
 )
 
@@ -25,14 +24,7 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	dbhost, dbport, dbuser, dbpass, dbdatabase := utils.GetDBCredentials()
-
-	db := pg.Connect(&pg.Options{
-		Addr: dbhost + ":" + dbport,
-		User:     dbuser,
-		Password: dbpass,
-		Database: dbdatabase,
-	})
+	db := utils.ConnectToPG()
 
 	oldVersion, newVersion, err := migrations.Run(db, flag.Args()...)
 

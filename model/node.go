@@ -43,8 +43,8 @@ type Node struct {
 
 	NebulasUsing []Nebula `json:"nebulas_using",pg:"nebulas_using"`
 
-	Contacts NodeContacts `json:"contacts"`
-	Socials NodeSocials `json:"socials"`
+	//Contacts NodeContacts `json:"contacts"`
+	//Socials NodeSocials `json:"socials"`
 }
 
 func (node *Node) Matches (str string) bool {

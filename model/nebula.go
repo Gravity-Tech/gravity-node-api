@@ -3,6 +3,7 @@ package model
 // Target chain
 
 type ChainType = int
+type SubscriptionFee = string
 
 const (
 	WAVES_TARGET_CHAIN ChainType = iota
@@ -46,7 +47,7 @@ type Nebula struct {
 	// required: true
 	TargetChain ChainType `json:"target_chain",pg:"target_chain"`
 
-	SubscriptionFee uint64 `json:"subscription_fee",pg:"subscription_fee"`
+	SubscriptionFee SubscriptionFee `json:"subscription_fee",pg:"subscription_fee"`
 
 	//Extractor *abstract.IExtractor `json:"extractor"`
 	NodesUsing []Node `json:"nodes_using",pg:"nodes_using"`

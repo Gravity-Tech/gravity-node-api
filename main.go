@@ -48,10 +48,11 @@ import (
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
 	"flag"
 	"fmt"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"net/http"
 )
 
-var port string
+var port, shouldFill string
 
 func headers(w http.ResponseWriter, req *http.Request) {
 	for name, headers := range req.Header {
@@ -63,10 +64,16 @@ func headers(w http.ResponseWriter, req *http.Request) {
 
 func init() {
 	flag.StringVar(&port, "port", "8090", "Path to config.toml")
+	flag.StringVar(&shouldFill, "fill", "0", "Whether to fill db with mockup data or not")
 	flag.Parse()
 }
 
 func main () {
+	if shouldFill != "0" {
+		db := &controller.DBController{ DB: utils.ConnectToPG() }
+		go db.PersistMockup()
+	}
+
 	http.HandleFunc("/hello", headers)
 	http.HandleFunc(router.GetAllNebulas, controller.GetAllNebulas)
 	http.HandleFunc(router.GetAllNodes, controller.GetAllNodes)

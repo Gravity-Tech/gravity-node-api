@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/go-pg/pg"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -30,4 +31,16 @@ func GetDBCredentials () (string, string, string, string, string) {
 	dbdatabase := os.Getenv("DB_NAME")
 
 	return dbhost, dbport, dbuser, dbpass, dbdatabase
+}
+
+func ConnectToPG () *pg.DB {
+	dbhost, dbport, dbuser, dbpass, dbdatabase := GetDBCredentials()
+
+	db := pg.Connect(&pg.Options{
+		Addr: dbhost + ":" + dbport,
+		User:     dbuser,
+		Password: dbpass,
+		Database: dbdatabase,
+	})
+	return db
 }
