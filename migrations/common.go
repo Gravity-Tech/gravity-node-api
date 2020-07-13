@@ -2,10 +2,18 @@ package main
 
 import "fmt"
 
+const (
+	materializedViewPostfix = "_materialized_view"
+)
+
 func CreateMaterializedViewQuery (tableName string) string {
-	return fmt.Sprintf("CREATE MATERIALIZED VIEW %[1]v_materialized_view AS SELECT * FROM %[1]v;", tableName)
+	return fmt.Sprintf("CREATE MATERIALIZED VIEW %v AS SELECT * FROM %v;", tableName + materializedViewPostfix, tableName)
 }
 
 func DropMaterializedViewQuery (tableName string) string {
-	return fmt.Sprintf("DROP MATERIALIZED VIEW %[1]v_materialized_view", tableName)
+	return fmt.Sprintf("DROP MATERIALIZED VIEW %[1]v;", tableName + materializedViewPostfix)
+}
+
+func UpdateMaterializedViewQuery (tableName string) string {
+	return fmt.Sprintf("REFRESH MATERIALIZED VIEW %[1]v;", tableName + materializedViewPostfix)
 }
