@@ -35,13 +35,13 @@ func init () {
 					contacts uuid,
 					socials uuid
 				);
-				`, tableName))
+				%v;
+				`, tableName, CreateMaterializedViewQuery(tableName)))
 			return err
-			//return nil
 		},
 		func(db migrations.DB) error {
 			fmt.Printf("dropping %v table...\n", tableName)
-			_, err := db.Exec(fmt.Sprintf(`DROP TABLE %v`, tableName))
+			_, err := db.Exec(fmt.Sprintf(`%v; DROP TABLE %v;`, DropMaterializedViewQuery(tableName), tableName))
 			return err
 		},
 	)
