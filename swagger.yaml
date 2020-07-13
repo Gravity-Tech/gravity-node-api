@@ -34,11 +34,6 @@ definitions:
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Nebula:
     properties:
-      NodesUsing:
-        description: Actual pointers
-        items:
-          type: string
-        type: array
       description:
         description: the description of the nebula
         type: string
@@ -47,6 +42,12 @@ definitions:
         description: the name of the nebula
         type: string
         x-go-name: Name
+      nodes_using:
+        description: Actual pointers
+        items:
+          type: string
+        type: array
+        x-go-name: NodesUsing
       regularity:
         description: |-
           Data feed subscription charge regularity

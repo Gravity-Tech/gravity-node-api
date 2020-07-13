@@ -28,10 +28,14 @@ func stringifyBigInt(any interface{}) string {
 func stringify(any interface{}) string {
 	return fmt.Sprintf("%v", any)
 }
+func mockupRandomAddress() string {
+	return petname.Generate(20, ";")
+}
 
 // Mockup functions
 func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 	var demoNode = model.Node{
+		Address:       mockupRandomAddress(),
 		Name:          "Demo Node #1",
 		Description:   "Demo Desc",
 		Score:         5,
@@ -41,6 +45,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		//NebulasUsing:  nil,
 	}
 	var binanceNode = model.Node{
+		Address:       mockupRandomAddress(),
 		Name:          "Binance Node #1",
 		Description:   "Binance Desc",
 		Score:         3,
@@ -50,6 +55,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		//NebulasUsing:  nil,
 	}
 	var huobiNode = model.Node{
+		Address:       mockupRandomAddress(),
 		Name:          "LinkPool Node",
 		Description:   `
 			LinkPool is a leading Chainlink node service provider with the goal 
@@ -67,6 +73,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 	}
 
 	var demoNebula = model.Nebula{
+		Address:       mockupRandomAddress(),
 		Name:            "Demo Nebula",
 		Status:          model.NebulaPendingStatus,
 		Description:     "",
@@ -77,6 +84,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		//NodesUsing:      nil,
 	}
 	var binanceNebula = model.Nebula{
+		Address:       mockupRandomAddress(),
 		Name:            "Binance Nebula",
 		Status:          model.NebulaActiveStatus,
 		Description:     "",
@@ -87,6 +95,7 @@ func GetMockup () (*[]model.Nebula, *[]model.Node)  {
 		//NodesUsing:      nil,
 	}
 	var coinbaseNebula = model.Nebula{
+		Address:       mockupRandomAddress(),
 		Name:            "Coinbase Nebula",
 		Status:          model.NebulaActiveStatus,
 		Description:     "Coinbase",
@@ -125,6 +134,7 @@ func DuplicateToSimilarNebulas(nebula *model.Nebula, amount int) *[]model.Nebula
 		newNebula := *nebula
 		newNebula.Name += " " + petname.Name() + " " + petname.Adjective()
 		newNebula.Score += model.Score(5 * index)
+		newNebula.Address = mockupRandomAddress()
 		newNebula.Description = petname.Generate(2, " ")
 
 		arr = append(arr, newNebula)
@@ -147,6 +157,7 @@ func DuplicateToSimilarNodes(node *model.Node, amount int) *[]model.Node {
 		newNode := *node
 		newNode.Name += " " + petname.Name() + " " + petname.Adjective()
 		newNode.Score += 5
+		newNode.Address = mockupRandomAddress()
 		newNode.Description = petname.Generate(2, " ")
 
 		arr = append(arr, newNode)

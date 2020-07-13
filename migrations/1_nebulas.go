@@ -18,7 +18,8 @@ func init () {
 
 				CREATE TABLE %[1]v (
 					internal_id uuid DEFAULT uuid_generate_v4 (),
-					name text PRIMARY KEY,
+					address text PRIMARY KEY,
+					name text,
 					status int,
 					description text,
 					score int,

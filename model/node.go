@@ -31,6 +31,11 @@ type NodeContactInfo struct {
 
 // swagger:model
 type Node struct {
+	// the address of the node
+	//
+	// required: true
+	Address string `json:"address"`
+
 	Name string  `json:"name"`
 	Description string  `json:"description"`
 	Score Score `json:"score"`

@@ -1,9 +1,18 @@
 package router
 
 const (
+	// Nebula routes
 	GetAllNebulas = "/nebulas/all"
-	GetAllNodes   = "/nodes/all"
-	GetCommonStats        = "/common/stats"
+	GetExactNebula  = "/nebulas/exact"
+
+	// Node Routes
 	GetNodeRewards        = "/nodes/rewards/all"
 	GetNodeActionsHistory = "/nodes/actions/history"
+	GetAllNodes   = "/nodes/all"
+	GetExactNode  = "/nodes/exact"
+
+	// Common stats
+	GetCommonStats        = "/common/stats"
+
+
 )

@@ -21,6 +21,11 @@ type Score = uint16
 // swagger:model
 type Nebula struct {
 
+	// the address of the nebula SC
+	//
+	// required: true
+	Address string `json:"address"`
+
 	// the name of the nebula
 	//
 	// required: true

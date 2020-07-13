@@ -80,10 +80,16 @@ func main () {
 
 	http.HandleFunc("/hello", headers)
 	http.HandleFunc(router.GetAllNebulas, responseController.GetAllNebulas)
-	http.HandleFunc(router.GetAllNodes, responseController.GetAllNodes)
-	http.HandleFunc(router.GetCommonStats, responseController.GetCommonStats)
+
+
 	http.HandleFunc(router.GetNodeRewards, responseController.GetNodeRewardsList)
 	http.HandleFunc(router.GetNodeActionsHistory, responseController.GetNodeActionsHistory)
+	http.HandleFunc(router.GetAllNodes, responseController.GetAllNodes)
+	http.HandleFunc(router.GetExactNode, responseController.GetExactNode)
+
+
+	http.HandleFunc(router.GetCommonStats, responseController.GetCommonStats)
+
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)

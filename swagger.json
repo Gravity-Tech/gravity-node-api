@@ -358,13 +358,6 @@
         "regularity"
       ],
       "properties": {
-        "NodesUsing": {
-          "description": "Actual pointers",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "description": {
           "description": "the description of the nebula",
           "type": "string",
@@ -374,6 +367,14 @@
           "description": "the name of the nebula",
           "type": "string",
           "x-go-name": "Name"
+        },
+        "nodes_using": {
+          "description": "Actual pointers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "NodesUsing"
         },
         "regularity": {
           "description": "Data feed subscription charge regularity\nRepresents minutes. For i.g. 1440 - one day",

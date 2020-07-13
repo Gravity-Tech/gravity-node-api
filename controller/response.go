@@ -241,3 +241,30 @@ func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+
+// swagger:route GET /nodes/exact Nodes getExactNode
+//
+// Returns exact node by name
+//
+// This will show all gravity node mockup actions history list
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: Node
+//		 404: null
+func (rc *ResponseController) GetExactNode (w http.ResponseWriter, req *http.Request) {
+
+}
