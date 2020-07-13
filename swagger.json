@@ -324,7 +324,7 @@
           "x-go-name": "Name"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "CommonStats": {
       "type": "object",
@@ -345,19 +345,7 @@
           "x-go-name": "Pulses"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
-    },
-    "IExtractor": {
-      "type": "object",
-      "properties": {
-        "DataFeedTag": {
-          "type": "string"
-        },
-        "Description": {
-          "type": "string"
-        }
-      },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/abstract"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "Nebula": {
       "type": "object",
@@ -370,25 +358,22 @@
         "regularity"
       ],
       "properties": {
+        "NodesUsing": {
+          "description": "Actual pointers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "description": {
           "description": "the description of the nebula",
           "type": "string",
           "x-go-name": "Description"
         },
-        "extractor": {
-          "$ref": "#/definitions/IExtractor"
-        },
         "name": {
           "description": "the name of the nebula",
           "type": "string",
           "x-go-name": "Name"
-        },
-        "nodes_using": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Node"
-          },
-          "x-go-name": "NodesUsing"
         },
         "regularity": {
           "description": "Data feed subscription charge regularity\nRepresents minutes. For i.g. 1440 - one day",
@@ -409,8 +394,7 @@
           "x-go-name": "Status"
         },
         "subscription_fee": {
-          "type": "integer",
-          "format": "uint64",
+          "type": "string",
           "x-go-name": "SubscriptionFee"
         },
         "target_chain": {
@@ -420,14 +404,11 @@
           "x-go-name": "TargetChain"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "Node": {
       "type": "object",
       "properties": {
-        "contacts": {
-          "$ref": "#/definitions/NodeContacts"
-        },
         "deposit_amount": {
           "type": "integer",
           "format": "int64",
@@ -457,9 +438,10 @@
           "x-go-name": "Name"
         },
         "nebulas_using": {
+          "description": "NebulasUsing []Nebula `json:\"nebulas_using\",pg:\"-\"`",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Nebula"
+            "type": "string"
           },
           "x-go-name": "NebulasUsing"
         },
@@ -467,12 +449,9 @@
           "type": "integer",
           "format": "uint16",
           "x-go-name": "Score"
-        },
-        "socials": {
-          "$ref": "#/definitions/NodeSocials"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "NodeContacts": {
       "type": "object",
@@ -482,7 +461,7 @@
           "x-go-name": "Website"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "NodeHistoryRecord": {
       "type": "object",
@@ -510,7 +489,7 @@
           "x-go-name": "Type"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "NodeReward": {
       "type": "object",
@@ -535,7 +514,7 @@
           "x-go-name": "Timestamp"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     },
     "NodeSocials": {
       "type": "object",
@@ -557,7 +536,7 @@
           "x-go-name": "Twitter"
         }
       },
-      "x-go-package": "_/usr/local/var/www/gravity-node-api-mockup/model"
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
     }
   },
   "securityDefinitions": {

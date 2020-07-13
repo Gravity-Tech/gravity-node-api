@@ -15,7 +15,7 @@ definitions:
         type: string
         x-go-name: Name
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   CommonStats:
     properties:
       data_feeds:
@@ -31,32 +31,22 @@ definitions:
         type: integer
         x-go-name: Pulses
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
-  IExtractor:
-    properties:
-      DataFeedTag:
-        type: string
-      Description:
-        type: string
-    type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/abstract
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Nebula:
     properties:
+      NodesUsing:
+        description: Actual pointers
+        items:
+          type: string
+        type: array
       description:
         description: the description of the nebula
         type: string
         x-go-name: Description
-      extractor:
-        $ref: '#/definitions/IExtractor'
       name:
         description: the name of the nebula
         type: string
         x-go-name: Name
-      nodes_using:
-        items:
-          $ref: '#/definitions/Node'
-        type: array
-        x-go-name: NodesUsing
       regularity:
         description: |-
           Data feed subscription charge regularity
@@ -75,8 +65,7 @@ definitions:
         type: integer
         x-go-name: Status
       subscription_fee:
-        format: uint64
-        type: integer
+        type: string
         x-go-name: SubscriptionFee
       target_chain:
         description: |-
@@ -93,11 +82,9 @@ definitions:
     - target_chain
     - regularity
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Node:
     properties:
-      contacts:
-        $ref: '#/definitions/NodeContacts'
       deposit_amount:
         format: int64
         type: integer
@@ -121,25 +108,24 @@ definitions:
         type: string
         x-go-name: Name
       nebulas_using:
+        description: NebulasUsing []Nebula `json:"nebulas_using",pg:"-"`
         items:
-          $ref: '#/definitions/Nebula'
+          type: string
         type: array
         x-go-name: NebulasUsing
       score:
         format: uint16
         type: integer
         x-go-name: Score
-      socials:
-        $ref: '#/definitions/NodeSocials'
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   NodeContacts:
     properties:
       website:
         type: string
         x-go-name: Website
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   NodeHistoryRecord:
     properties:
       asset:
@@ -160,7 +146,7 @@ definitions:
         type: integer
         x-go-name: Type
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   NodeReward:
     properties:
       amount:
@@ -179,7 +165,7 @@ definitions:
         type: integer
         x-go-name: Timestamp
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   NodeSocials:
     properties:
       fb:
@@ -195,7 +181,7 @@ definitions:
         type: string
         x-go-name: Twitter
     type: object
-    x-go-package: _/usr/local/var/www/gravity-node-api-mockup/model
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
 host: node.gravityhub.org:8090
 info:
   contact:
