@@ -18,9 +18,12 @@ const (
 
 func (dbc *DBController) PersistMockup () {
 	nebulas, nodes := utils.GetMockup()
+	datafeeds := utils.GetDatafeedsMockup(250)
 
 	dbc.persistNebulas(nebulas)
 	dbc.persistNodes(nodes)
+
+	dbc.persistDatafeedsList(datafeeds)
 }
 
 func (dbc *DBController) RefreshNebulasAndNodesMaterializedView () {
@@ -59,6 +62,23 @@ func (dbc *DBController) persistNodes(nodes *[]model.Node) {
 
 		dbc.errorHandle("Node", err)
 	}
+}
+
+func (dbc *DBController) persistDatafeedsList(datafeedsList *[]*model.Extractor) {
+	for _, datafeed := range *datafeedsList {
+		err := dbc.DB.Insert(datafeed)
+
+		dbc.errorHandle("Datafeed", err)
+	}
+}
+
+func (dbc *DBController) AllDatafeedsList() *[]*model.Extractor {
+	var list []*model.Extractor
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf("SELECT * FROM %v;", model.DefaultExtendedDBTableNames.Datafeeds))
+	dbc.errorHandle("AllNebulasList", err)
+
+	return &list
 }
 
 func (dbc *DBController) AllNebulasList () *[]*model.Nebula {

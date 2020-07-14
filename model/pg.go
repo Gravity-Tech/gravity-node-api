@@ -1,7 +1,7 @@
 package model
 
 type DBTableNames struct {
-	Nebulas, Nodes, NodeRewards, NodeSocials string
+	Nebulas, Nodes, NodeRewards, NodeSocials, Datafeeds string
 }
 
 var DefaultExtendedDBTableNames = &DBTableNames{
@@ -9,4 +9,5 @@ var DefaultExtendedDBTableNames = &DBTableNames{
 	Nodes:       "nodes",
 	NodeRewards: "node_rewards",
 	NodeSocials: "node_socials",
+	Datafeeds:   "data_feeds",
 }

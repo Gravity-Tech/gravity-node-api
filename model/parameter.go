@@ -1,7 +1,7 @@
 package model
 
 
-// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory getExactNebula getExactNode
+// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory getExactNebula getExactNode getAvailableDataFeeds
 type QueryParam struct {
 	// a QueryParam acts like a search string for fields.
 	// Use as a regexp expression.
@@ -10,7 +10,7 @@ type QueryParam struct {
 	Query string `json:"q"`
 }
 
-// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory
+// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory getAvailableDataFeeds
 type CurrentPageParam struct {
 	// a CurrentPageParam represents current page
 	// Only positive integers allowed. Default is 1
@@ -19,7 +19,7 @@ type CurrentPageParam struct {
 	Page uint64 `json:"page"`
 }
 
-// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory
+// swagger:parameters getAllNebulas getAllNodes getNodeRewards getNodeActionHistory getAvailableDataFeeds
 type ItemsPerPageParam struct {
 	// an ItemsPerPageParam represents items count per page
 	// Only positive integers allowed. Default is 12

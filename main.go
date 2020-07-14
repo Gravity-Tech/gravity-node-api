@@ -47,7 +47,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller/response"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"net/http"
 )
@@ -82,22 +82,11 @@ func main () {
 	go db.RefreshNebulasAndNodesMaterializedView()
 	<- ch
 
-	responseController := &controller.ResponseController{}
-	responseController.DBControllerDelegate = db
-
 	http.HandleFunc("/hello", headers)
-	http.HandleFunc(router.GetAllNebulas, responseController.GetAllNebulas)
-	http.HandleFunc(router.GetExactNebula, responseController.GetExactNebula)
 
-
-	http.HandleFunc(router.GetNodeRewards, responseController.GetNodeRewardsList)
-	http.HandleFunc(router.GetNodeActionsHistory, responseController.GetNodeActionsHistory)
-	http.HandleFunc(router.GetAllNodes, responseController.GetAllNodes)
-	http.HandleFunc(router.GetExactNode, responseController.GetExactNode)
-
-
-	http.HandleFunc(router.GetCommonStats, responseController.GetCommonStats)
-
+	responseController := &response.ResponseController{}
+	responseController.DBControllerDelegate = db
+	responseController.Handle()
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)

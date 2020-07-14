@@ -14,5 +14,9 @@ const (
 	// Common stats
 	GetCommonStats        = "/common/stats"
 
+	// Data feeds
+	GetAvailableDataFeeds = "/data/datafeeds/all"
 
+	// For extractors
+	GetAvailableExtractors = "/data/extractors/all"
 )

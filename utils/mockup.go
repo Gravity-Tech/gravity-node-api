@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
 	petname "github.com/dustinkirkland/golang-petname"
+	"strings"
 	"time"
 )
 
@@ -218,6 +219,28 @@ func GetNodeRewardsListMockup() *[]model.NodeReward {
 	}
 
 	return &rewards
+}
+
+func GetDatafeedsMockup(qty int) *[]*model.Extractor {
+	var list []*model.Extractor
+
+	index := 0
+	for {
+		if index == qty { break }
+
+		extractor := &model.Extractor{
+			DataFeedTag: strings.Join([]string {
+				petname.Adjective(), petname.Name(), petname.Adverb(),
+			}, "_"),
+			Description: petname.Generate(50, "_"),
+		}
+
+		list = append(list, extractor)
+
+		index++
+	}
+
+	return &list
 }
 
 //
