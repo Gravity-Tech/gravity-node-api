@@ -2,7 +2,7 @@ package model
 
 type RawData = byte
 
-// swagger: model
+// swagger:model
 type Extractor struct {
 	tableName struct{} `sql:"data_feeds"`
 

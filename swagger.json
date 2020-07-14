@@ -111,7 +111,13 @@
         ],
         "responses": {
           "200": {
-            "$ref": "#/responses/Extractor"
+            "description": "Extractor",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Extractor"
+              }
+            }
           }
         }
       }
@@ -486,6 +492,26 @@
           "type": "integer",
           "format": "uint64",
           "x-go-name": "Pulses"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
+    },
+    "Extractor": {
+      "type": "object",
+      "required": [
+        "datafeed_tag",
+        "description"
+      ],
+      "properties": {
+        "datafeed_tag": {
+          "description": "Data feed tag for distinct usage",
+          "type": "string",
+          "x-go-name": "DataFeedTag"
+        },
+        "description": {
+          "description": "Common extractor description",
+          "type": "string",
+          "x-go-name": "Description"
         }
       },
       "x-go-package": "github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"

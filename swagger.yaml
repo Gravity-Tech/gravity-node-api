@@ -32,6 +32,21 @@ definitions:
         x-go-name: Pulses
     type: object
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
+  Extractor:
+    properties:
+      datafeed_tag:
+        description: Data feed tag for distinct usage
+        type: string
+        x-go-name: DataFeedTag
+      description:
+        description: Common extractor description
+        type: string
+        x-go-name: Description
+    required:
+    - datafeed_tag
+    - description
+    type: object
+    x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
   Nebula:
     properties:
       address:
@@ -266,7 +281,11 @@ paths:
       - application/json
       responses:
         "200":
-          $ref: '#/responses/Extractor'
+          description: Extractor
+          schema:
+            items:
+              $ref: '#/definitions/Extractor'
+            type: array
       schemes:
       - http
       - https
