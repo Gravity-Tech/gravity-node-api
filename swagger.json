@@ -122,6 +122,50 @@
         }
       }
     },
+    "/nebulas/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact Nebula by address",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "getExactNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nebula",
+            "schema": {
+              "$ref": "#/definitions/Nebula"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/null"
+          }
+        }
+      }
+    },
     "/nodes/actions/history": {
       "get": {
         "security": [
@@ -244,6 +288,50 @@
         }
       }
     },
+    "/nodes/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact node by name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Nodes"
+        ],
+        "operationId": "getExactNode",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Node",
+            "schema": {
+              "$ref": "#/definitions/Node"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/null"
+          }
+        }
+      }
+    },
     "/nodes/rewards/all": {
       "get": {
         "security": [
@@ -350,6 +438,7 @@
     "Nebula": {
       "type": "object",
       "required": [
+        "address",
         "name",
         "status",
         "description",
@@ -358,6 +447,11 @@
         "regularity"
       ],
       "properties": {
+        "address": {
+          "description": "the address of the nebula SC",
+          "type": "string",
+          "x-go-name": "Address"
+        },
         "description": {
           "description": "the description of the nebula",
           "type": "string",
@@ -409,7 +503,15 @@
     },
     "Node": {
       "type": "object",
+      "required": [
+        "address"
+      ],
       "properties": {
+        "address": {
+          "description": "the address of the node",
+          "type": "string",
+          "x-go-name": "Address"
+        },
         "deposit_amount": {
           "type": "integer",
           "format": "int64",

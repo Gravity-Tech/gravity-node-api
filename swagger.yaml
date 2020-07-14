@@ -279,6 +279,36 @@ paths:
       summary: Returns all available gravity nebulas
       tags:
       - Nebulas
+  /nebulas/exact:
+    get:
+      consumes:
+      - application/json
+      description: Returns exact Nebula by address
+      operationId: getExactNebula
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Nebula
+          schema:
+            $ref: '#/definitions/Nebula'
+        "404":
+          $ref: '#/responses/null'
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      tags:
+      - Nodes
   /nodes/actions/history:
     get:
       consumes:
@@ -377,8 +407,16 @@ paths:
     get:
       consumes:
       - application/json
-      description: This will show all gravity node mockup actions history list
+      description: Returns exact node by name
       operationId: getExactNode
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
       produces:
       - application/json
       responses:
@@ -393,7 +431,6 @@ paths:
       - https
       security:
       - api_key: []
-      summary: Returns exact node by name
       tags:
       - Nodes
   /nodes/rewards/all:
