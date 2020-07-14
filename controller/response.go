@@ -276,7 +276,7 @@ func (rc *ResponseController) GetExactNode (w http.ResponseWriter, req *http.Req
 }
 
 
-// swagger:route GET /nebulas/exact Nodes getExactNebula
+// swagger:route GET /nebulas/exact Nebulas getExactNebula
 //
 // Returns exact Nebula by address
 //
