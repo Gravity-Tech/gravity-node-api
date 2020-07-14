@@ -308,7 +308,7 @@ paths:
       security:
       - api_key: []
       tags:
-      - Nodes
+      - Nebulas
   /nodes/actions/history:
     get:
       consumes:

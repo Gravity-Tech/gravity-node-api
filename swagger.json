@@ -141,7 +141,7 @@
           "https"
         ],
         "tags": [
-          "Nodes"
+          "Nebulas"
         ],
         "operationId": "getExactNebula",
         "parameters": [
