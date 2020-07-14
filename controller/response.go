@@ -14,6 +14,7 @@ type ResponseController struct {
 
 func addBaseHeaders (headers http.Header) {
 	headers.Add("Content-Type", "application/json")
+	headers.Set("Access-Control-Allow-Origin", "*")
 }
 
 // swagger:route GET /nebulas/all Nebulas getAllNebulas
