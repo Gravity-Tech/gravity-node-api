@@ -232,6 +232,49 @@ paths:
       summary: Returns gravity node common statistics
       tags:
       - Common
+  /data/datafeeds/all:
+    get:
+      consumes:
+      - application/json
+      description: Data feeds
+      operationId: getAvailableDataFeeds
+      parameters:
+      - description: |-
+          a QueryParam acts like a search string for fields.
+          Use as a regexp expression.
+        in: query
+        name: q
+        type: string
+        x-go-name: Query
+      - description: |-
+          a CurrentPageParam represents current page
+          Only positive integers allowed. Default is 1
+        format: uint64
+        in: query
+        name: page
+        type: integer
+        x-go-name: Page
+      - description: |-
+          an ItemsPerPageParam represents items count per page
+          Only positive integers allowed. Default is 12
+        format: uint64
+        in: query
+        name: items
+        type: integer
+        x-go-name: Items
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/Extractor'
+      schemes:
+      - http
+      - https
+      security:
+      - api_key: []
+      summary: Returns available data feeds
+      tags:
+      - Datafeeds
   /nebulas/all:
     get:
       consumes:
