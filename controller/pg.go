@@ -106,7 +106,7 @@ func (dbc *DBController) mapTableToMaterializedView(tableName string) string {
 func (dbc *DBController) ExactNode (address string) *model.Node {
 	var node model.Node
 
-	destination := dbc.mapTableToMaterializedView(model.DefaultExtendedDBTableNames.Nodes)
+	destination := model.DefaultExtendedDBTableNames.Nodes
 
 	result, err := dbc.DB.Query(&node, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
 	dbc.errorHandle("ExactNode", err)
@@ -119,7 +119,7 @@ func (dbc *DBController) ExactNode (address string) *model.Node {
 func (dbc *DBController) ExactNebula (address string) *model.Nebula {
 	var nebula model.Nebula
 
-	destination := dbc.mapTableToMaterializedView(model.DefaultExtendedDBTableNames.Nebulas)
+	destination := model.DefaultExtendedDBTableNames.Nebulas
 
 	result, err := dbc.DB.Query(&nebula, fmt.Sprintf("SELECT * FROM %v WHERE address = '%v';", destination, address))
 	dbc.errorHandle("ExactNebula", err)

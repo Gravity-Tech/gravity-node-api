@@ -29,10 +29,7 @@ func init () {
 					joined_at bigint,
 					locked_until bigint,
 
-					nebulas_using text[],
-
-					contacts uuid,
-					socials uuid
+					nebulas_using text[]
 				);
 				%v;
 				`, tableName, common.CreateMaterializedViewQuery(tableName)))
