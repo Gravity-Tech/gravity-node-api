@@ -209,7 +209,7 @@ definitions:
         x-go-name: Twitter
     type: object
     x-go-package: github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model
-host: node.gravityhub.org:8090
+host: node.gravityhub.org
 info:
   contact:
     email: shamil@venlab.dev

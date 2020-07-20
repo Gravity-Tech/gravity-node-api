@@ -25,7 +25,7 @@
     },
     "version": "1.0"
   },
-  "host": "node.gravityhub.org:8090",
+  "host": "node.gravityhub.org",
   "basePath": "/",
   "paths": {
     "/common/stats": {
