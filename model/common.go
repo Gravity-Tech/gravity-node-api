@@ -1,6 +1,9 @@
 package model
 
-import "regexp"
+import (
+	"regexp"
+	"strings"
+)
 
 type CommonStatus = uint
 
@@ -22,11 +25,13 @@ type ISearchable interface {
 }
 
 func MatchStrList (fieldValues []string, str string) bool {
+	str = strings.ToLower(str)
 	regex, err := regexp.Compile(str)
 
 	if err != nil { return false }
 
 	for _, value := range fieldValues {
+		value = strings.ToLower(value)
 
 		matched := regex.Match([]byte(value))
 
