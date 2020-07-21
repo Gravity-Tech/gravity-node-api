@@ -3,7 +3,6 @@ package response
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
 	"net/http"
 )
 
@@ -29,7 +28,7 @@ import (
 //     Responses:
 //       200: CommonStats
 func (rc *ResponseController) GetCommonStats(w http.ResponseWriter, req *http.Request) {
-	stats := utils.GetCommonStatsMockup()
+	stats := rc.DBControllerDelegate.CommonStats()
 
 	bytes, _ := json.Marshal(stats)
 

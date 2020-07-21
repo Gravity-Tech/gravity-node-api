@@ -90,6 +90,16 @@ func (dbc *DBController) AllNebulasList () *[]*model.Nebula {
 	return &list
 }
 
+func (dbc *DBController) CommonStats () *model.CommonStats {
+	var stats model.CommonStats
+
+	_, err := dbc.DB.Query(&stats, fmt.Sprintf("SELECT * FROM %v LIMIT 1;", model.DefaultExtendedDBTableNames.CommonStats))
+	dbc.errorHandle("CommonStats", err)
+
+	return &stats
+
+}
+
 func (dbc *DBController) AllNodesList () *[]*model.Node {
 	var list []*model.Node
 
