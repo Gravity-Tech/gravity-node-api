@@ -15,14 +15,17 @@ var oldNodeVersion, newNodeVersion *model.Node
 var oldNodeFieldValue, newNodeFieldValue string
 
 func InsertDefinedNodeIPRecord() {
-	newClient := client.NewLedgerClient(ledgerNodeEndpoint)
+	path := fmt.Sprintf("http://%v", ledgerNodeEndpoint)
+	newClient := client.NewLedgerClient(path)
 
 	validatorStatus, err := newClient.FetchValidatorStatus()
 
 	handleInitError(err)
 	if err != nil { return }
 
-	nodeIPMapRecord := &model.NodeIPMapRecord{
+	fmt.Printf("Valiator status: %+v \n", validatorStatus.ValidatorInfo.PubKey)
+
+	nodeIPMapRecord = &model.NodeIPMapRecord{
 		IPAddress: ledgerNodeEndpoint,
 		PublicKey: string(validatorStatus.ValidatorInfo.PubKey.Bytes()),
 	}
@@ -43,16 +46,21 @@ func CleanupDefinedNodeIPRecord() {
 }
 
 func TestUpdateNodeDetailsOnNew(t *testing.T) {
-	client := client.NewLedgerClient(nodeIPMapRecord.IPAddress)
+	path := fmt.Sprintf("http://%v", nodeIPMapRecord.IPAddress)
+	t.Logf("Ledger client: %v \n", path)
+	ledgerClient := client.NewLedgerClient(path)
 
-	validatorDetails, err := client.FetchValidatorDetails()
+	validatorDetails, err := ledgerClient.FetchValidatorDetails()
 	handleTestError(err, t)
 
 	db := controller.NewDBController()
 
-	db.UpdateNodeDetails(nodeIPMapRecord.PublicKey, validatorDetails)
+	// DROP existing node
+	err = db.DB.Delete(&model.Node{ PublicKey: nodeIPMapRecord.PublicKey })
+	handleTestError(err, t)
 
-
+	err = db.UpdateNodeDetails(nodeIPMapRecord.PublicKey, validatorDetails)
+	handleTestError(err, t)
 }
 
 func TestUpdateNodeDetailsExisting(t *testing.T) {

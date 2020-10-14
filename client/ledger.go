@@ -6,6 +6,9 @@ import (
 	coreconfig "github.com/Gravity-Tech/gravity-core/config"
 	abcitypes "github.com/tendermint/tendermint/abci/types"
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
+	rpctypes "github.com/tendermint/tendermint/rpc/jsonrpc/types"
+	rpcclient "github.com/tendermint/tendermint/rpc/client"
+
 	"io/ioutil"
 	"net/http"
 )
@@ -46,15 +49,25 @@ func (ledger *LedgerClient) FetchValidatorStatus() (*ctypes.ResultStatus, error)
 
 	byteValue, err := ioutil.ReadAll(response.Body)
 
-	var resultStatus ctypes.ResultStatus
+	var statusResponse rpctypes.RPCResponse
 
-	err = json.Unmarshal(byteValue, &resultStatus)
+	err = json.Unmarshal(byteValue, &statusResponse)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &resultStatus, nil
+	fmt.Printf("statusResponse: %v\n", string(statusResponse.Result))
+
+	var resultResponse ctypes.ResultStatus
+	err = json.Unmarshal(statusResponse.Result, &resultResponse)
+
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Printf("Resp: %+v\n", resultResponse)
+	return &resultResponse, nil
 }
 
 func (ledger *LedgerClient) FetchValidatorDetails() (*coreconfig.ValidatorDetails, error) {

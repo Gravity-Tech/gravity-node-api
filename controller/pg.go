@@ -82,9 +82,14 @@ func (dbc *DBController) UpdateNodeDetails(publicKey string, details *config.Val
 
 	var node *model.Node
 	for i := 0; i < 2; i++ {
+		node = &model.Node{
+			PublicKey:     publicKey,
+		}
+		node.UpdateByValidatorDetails(details)
 		_, err := db.Model(node).
 			OnConflict("(public_key) DO UPDATE").
 			Set("name = EXCLUDED.name").
+			Set("description = EXCLUDED.description").
 			Set("description = EXCLUDED.description").
 			Insert()
 		if err != nil {
