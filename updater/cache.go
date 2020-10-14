@@ -14,10 +14,14 @@ type entityUpdater interface {
 	UpdateEntity()
 }
 
-type NodesCacheUpdater struct {}
+type NodesCacheUpdater struct {
+	DB *controller.DBController
+}
 
 func NewNodesCacheUpdater () *NodesCacheUpdater {
-	return &NodesCacheUpdater{}
+	return &NodesCacheUpdater{
+		DB: controller.NewDBController(),
+	}
 }
 
 func (updater *NodesCacheUpdater) Start() {
@@ -53,7 +57,7 @@ func (updater *NodesCacheUpdater) updateNode(endpoint string, wg *sync.WaitGroup
 	Takes node_ips_map as base for updating
  */
 func (updater *NodesCacheUpdater) UpdateEntity() {
-	db := controller.NewDBController()
+	db := updater.DB
 	nodeIPsRecords := db.AllNodeIPsRecords()
 
 	if len(*nodeIPsRecords) == 0 {
