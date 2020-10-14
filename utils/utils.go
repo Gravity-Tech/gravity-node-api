@@ -44,9 +44,13 @@ func ConnectToPGOld () *oldpg.DB {
 		Password: dbpass,
 		Database: dbdatabase,
 	}
-	options.TLSConfig = &tls.Config{
-		InsecureSkipVerify: true,
+
+	if os.Getenv("IS_SECURE_DB") != "" {
+		options.TLSConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
+
 	db := oldpg.Connect(options)
 
 	return db
@@ -60,8 +64,10 @@ func ConnectToPG () *pg.DB {
 		Password: dbpass,
 		Database: dbdatabase,
 	}
-	options.TLSConfig = &tls.Config{
-		InsecureSkipVerify: true,
+	if os.Getenv("IS_SECURE_DB") != "" {
+		options.TLSConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
 	db := pg.Connect(options)
 

@@ -84,10 +84,10 @@ func (dbc *DBController) UpdateNodeDetails(publicKey string, details *config.Val
 	node := &model.Node{ PublicKey: publicKey }
 	node.UpdateByValidatorDetails(details, status)
 
-	doesExist, err := db.Model(node).Exists()
-	if err != nil {
-		return err
-	}
+	var selectTo model.Node
+	err := db.Model(&selectTo).Where("public_key = ?", publicKey).Select()
+
+	doesExist := err == nil
 
 	if doesExist {
 		// Update existing
@@ -99,6 +99,7 @@ func (dbc *DBController) UpdateNodeDetails(publicKey string, details *config.Val
 	} else {
 		// Create
 		_, err := db.Model(node).Insert()
+
 		dbc.errorHandle("UpdateNodeDetails - create new", err)
 		if err != nil {
 			return err
