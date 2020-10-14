@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"crypto/tls"
 	"github.com/go-pg/pg/v10"
 	oldpg "github.com/go-pg/pg"
 	"github.com/joho/godotenv"
@@ -37,25 +38,32 @@ func GetDBCredentials () (string, string, string, string, string) {
 func ConnectToPGOld () *oldpg.DB {
 	dbhost, dbport, dbuser, dbpass, dbdatabase := GetDBCredentials()
 
-	db := oldpg.Connect(&oldpg.Options{
+	options := &oldpg.Options{
 		Addr: dbhost + ":" + dbport,
 		User:     dbuser,
 		Password: dbpass,
 		Database: dbdatabase,
-	})
+	}
+	options.TLSConfig = &tls.Config{
+		InsecureSkipVerify: true,
+	}
+	db := oldpg.Connect(options)
 
 	return db
 }
 
 func ConnectToPG () *pg.DB {
 	dbhost, dbport, dbuser, dbpass, dbdatabase := GetDBCredentials()
-
-	db := pg.Connect(&pg.Options{
+	options := &pg.Options{
 		Addr: dbhost + ":" + dbport,
 		User:     dbuser,
 		Password: dbpass,
 		Database: dbdatabase,
-	})
+	}
+	options.TLSConfig = &tls.Config{
+		InsecureSkipVerify: true,
+	}
+	db := pg.Connect(options)
 
 	return db
 }
