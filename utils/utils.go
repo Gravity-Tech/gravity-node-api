@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"crypto/tls"
 	"github.com/go-pg/pg"
 	"github.com/joho/godotenv"
 	"os"
@@ -42,9 +41,9 @@ func ConnectToPG () *pg.DB {
 		User:     dbuser,
 		Password: dbpass,
 		Database: dbdatabase,
-		TLSConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
+		//TLSConfig: &tls.Config{
+		//	InsecureSkipVerify: true,
+		//},
 	})
 	return db
 }

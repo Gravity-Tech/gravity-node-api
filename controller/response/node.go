@@ -133,7 +133,15 @@ func (rc *ResponseController) GetAllNodes(w http.ResponseWriter, req *http.Reque
 //		 404: null
 func (rc *ResponseController) GetExactNode (w http.ResponseWriter, req *http.Request) {
 	address := req.URL.Query().Get("q")
-	exactNode := rc.DBControllerDelegate.ExactNode(address)
+	publicKey := req.URL.Query().Get("pubKey")
+
+	var exactNode *model.Node
+
+	if address != ""  {
+		exactNode = rc.DBControllerDelegate.ExactNode(address)
+	} else if publicKey != "" {
+		exactNode = rc.DBControllerDelegate.ExactNodeByPubKey(publicKey)
+	}
 
 	bytes, _ := json.Marshal(exactNode)
 

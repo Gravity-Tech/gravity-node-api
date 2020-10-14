@@ -48,11 +48,12 @@ import (
 	"fmt"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
 	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller/response"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
+	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/updater"
 	"net/http"
 )
 
-var port, shouldFill string
+var port string
+var isDebug, shouldFill bool
 
 func headers(w http.ResponseWriter, req *http.Request) {
 	for name, headers := range req.Header {
@@ -64,15 +65,17 @@ func headers(w http.ResponseWriter, req *http.Request) {
 
 func init() {
 	flag.StringVar(&port, "port", "8090", "Path to config.toml")
-	flag.StringVar(&shouldFill, "fill", "0", "Whether to fill db with mockup data or not")
+	flag.BoolVar(&shouldFill, "fill", false, "Should fill the db")
+	flag.BoolVar(&isDebug, "debug", false, "is debug mode enabled")
+
 	flag.Parse()
 }
 
 func main () {
-	db := &controller.DBController{ DB: utils.ConnectToPG() }
+	db := controller.NewDBController()
 
 	ch := make(chan int, 1)
-	if shouldFill != "0" {
+	if shouldFill {
 		ch <- 0
 		go db.PersistMockup()
 		<- ch
@@ -87,6 +90,9 @@ func main () {
 	responseController := &response.ResponseController{}
 	responseController.DBControllerDelegate = db
 	responseController.Handle()
+
+	cacheUpdater := updater.NewNodesCacheUpdater()
+	go cacheUpdater.Start()
 
 	fmt.Printf("Listening on port: %s\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
