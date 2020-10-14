@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
+	"github.com/Gravity-Tech/gravity-node-api/utils"
 	"github.com/go-pg/migrations"
 	"os"
 )

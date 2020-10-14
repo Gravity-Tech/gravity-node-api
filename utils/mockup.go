@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
+	"github.com/Gravity-Tech/gravity-node-api/model"
 	petname "github.com/dustinkirkland/golang-petname"
 	"strings"
 	"time"

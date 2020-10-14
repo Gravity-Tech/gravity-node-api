@@ -3,7 +3,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
-	core_config "github.com/Gravity-Tech/gravity-core/config"
+	"github.com/Gravity-Tech/gravity-core/config"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	abcitypes "github.com/tendermint/tendermint/abci/types"
 	"io/ioutil"

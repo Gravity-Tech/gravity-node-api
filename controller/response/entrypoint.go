@@ -1,8 +1,8 @@
 package response
 
 import (
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/router"
+	"github.com/Gravity-Tech/gravity-node-api/controller"
+	"github.com/Gravity-Tech/gravity-node-api/router"
 	"net/http"
 )
 

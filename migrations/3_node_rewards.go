@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
+	"github.com/Gravity-Tech/gravity-node-api/model"
 	"github.com/go-pg/migrations"
 )
 
