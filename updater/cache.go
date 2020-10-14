@@ -45,10 +45,12 @@ func (updater *NodesCacheUpdater) updateNode(endpoint string, wg *sync.WaitGroup
 		return err
 	}
 
-
-	updater.log(fmt.Sprintf("Updated Node details: %+v; Status: %v; \n", details, validatorStatus))
-
 	err = db.UpdateNodeDetails(pubKey, details, validatorStatus)
+	if err != nil {
+		updater.log(fmt.Sprintf("Error occured on node details update: %+v; \n", err))
+	} else {
+		updater.log(fmt.Sprintf("Updated Node details: %+v; Status: %v; \n", details, validatorStatus))
+	}
 
 	return nil
 }
@@ -68,10 +70,8 @@ func (updater *NodesCacheUpdater) UpdateEntity() {
 	var wg sync.WaitGroup
 	for _, nodeRecord := range *nodeIPsRecords {
 		wg.Add(1)
-
 		endpoint := fmt.Sprintf("http://%v", nodeRecord.IPAddress)
 		go updater.updateNode(endpoint, &wg, db, nodeRecord.PublicKey)
-		//go updater.updateNode(nodeRecord.IPAddress, &wg)
 	}
 	wg.Wait()
 }
