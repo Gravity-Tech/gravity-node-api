@@ -2,10 +2,12 @@ package controller
 
 import (
 	"fmt"
+	"github.com/Gravity-Tech/gravity-core/config"
+	"github.com/Gravity-Tech/gravity-node-api/client"
 	"github.com/Gravity-Tech/gravity-node-api/migrations/common"
 	"github.com/Gravity-Tech/gravity-node-api/model"
 	"github.com/Gravity-Tech/gravity-node-api/utils"
-	"github.com/go-pg/pg"
+	"github.com/go-pg/pg/v10"
 )
 
 type DBController struct {
@@ -53,7 +55,7 @@ func (dbc *DBController) errorHandle (prefix string, err error) {
 func (dbc *DBController) persistNebulas(nebulas *[]model.Nebula) {
 
 	for _, nebula := range *nebulas {
-		err := dbc.DB.Insert(&nebula)
+		_, err := dbc.DB.Model(&nebula).Insert()
 
 		dbc.errorHandle("Nebula", err)
 	}
@@ -62,7 +64,7 @@ func (dbc *DBController) persistNebulas(nebulas *[]model.Nebula) {
 func (dbc *DBController) persistNodes(nodes *[]model.Node) {
 
 	for _, node := range *nodes {
-		err := dbc.DB.Insert(&node)
+		_, err := dbc.DB.Model(&node).Insert()
 
 		dbc.errorHandle("Node", err)
 	}
@@ -70,10 +72,41 @@ func (dbc *DBController) persistNodes(nodes *[]model.Node) {
 
 func (dbc *DBController) persistDatafeedsList(datafeedsList *[]*model.Extractor) {
 	for _, datafeed := range *datafeedsList {
-		err := dbc.DB.Insert(datafeed)
+		_, err := dbc.DB.Model(datafeed).Insert()
 
 		dbc.errorHandle("Datafeed", err)
 	}
+}
+
+func (dbc *DBController) UpdateNodeDetails(publicKey string, details *config.ValidatorDetails, status *client.ValidatorStatus) error {
+	db := dbc.DB
+
+	node := &model.Node{ PublicKey: publicKey }
+	node.UpdateByValidatorDetails(details, status)
+
+	doesExist, err := db.Model(node).Exists()
+	if err != nil {
+		return err
+	}
+
+	if doesExist {
+		// Update existing
+		_, err := db.Model(node).WherePK().Update()
+		dbc.errorHandle("UpdateNodeDetails - update existing", err)
+		if err != nil {
+			return err
+		}
+	} else {
+		// Create
+		_, err := db.Model(node).Insert()
+		dbc.errorHandle("UpdateNodeDetails - create new", err)
+		if err != nil {
+			return err
+		}
+	}
+
+	dbc.errorHandle("UpdateNodeDetails", err)
+	return err
 }
 
 func (dbc *DBController) AllDatafeedsList() *[]*model.Extractor {

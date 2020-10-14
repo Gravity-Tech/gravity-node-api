@@ -1,7 +1,8 @@
 package utils
 
 import (
-	"github.com/go-pg/pg"
+	"github.com/go-pg/pg/v10"
+	oldpg "github.com/go-pg/pg"
 	"github.com/joho/godotenv"
 	"os"
 )
@@ -33,6 +34,19 @@ func GetDBCredentials () (string, string, string, string, string) {
 	return dbhost, dbport, dbuser, dbpass, dbdatabase
 }
 
+func ConnectToPGOld () *oldpg.DB {
+	dbhost, dbport, dbuser, dbpass, dbdatabase := GetDBCredentials()
+
+	db := oldpg.Connect(&oldpg.Options{
+		Addr: dbhost + ":" + dbport,
+		User:     dbuser,
+		Password: dbpass,
+		Database: dbdatabase,
+	})
+
+	return db
+}
+
 func ConnectToPG () *pg.DB {
 	dbhost, dbport, dbuser, dbpass, dbdatabase := GetDBCredentials()
 
@@ -41,9 +55,7 @@ func ConnectToPG () *pg.DB {
 		User:     dbuser,
 		Password: dbpass,
 		Database: dbdatabase,
-		//TLSConfig: &tls.Config{
-		//	InsecureSkipVerify: true,
-		//},
 	})
+
 	return db
 }

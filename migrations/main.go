@@ -24,7 +24,7 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	db := utils.ConnectToPG()
+	db := utils.ConnectToPGOld()
 
 	oldVersion, newVersion, err := migrations.Run(db, flag.Args()...)
 

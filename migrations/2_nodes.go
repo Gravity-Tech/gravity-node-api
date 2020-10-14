@@ -18,7 +18,7 @@ func init () {
 				CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 				CREATE TABLE %[1]v (
-					address text PRIMARY KEY,
+					address text,
 					public_key text,
 					name text,
 					description text,
@@ -30,7 +30,9 @@ func init () {
 					joined_at bigint,
 					locked_until bigint,
 
-					nebulas_using text[]
+					nebulas_using text[],
+					
+					PRIMARY KEY (public_key)
 				);
 				%v;
 				`, tableName, common.CreateMaterializedViewQuery(tableName)))
