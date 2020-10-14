@@ -2,9 +2,9 @@ package updater
 
 import (
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/client"
-	core_config "github.com/Gravity-Tech/gravity-core/config"
+	"github.com/Gravity-Tech/gravity-node-api/controller"
+	"github.com/Gravity-Tech/gravity-node-api/client"
+	"github.com/Gravity-Tech/gravity-core/config"
 	"time"
 )
 

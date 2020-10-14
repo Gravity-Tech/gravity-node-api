@@ -46,9 +46,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/controller/response"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/updater"
+	"github.com/Gravity-Tech/gravity-node-api/controller"
+	"github.com/Gravity-Tech/gravity-node-api/controller/response"
+	"github.com/Gravity-Tech/gravity-node-api/updater"
 	"net/http"
 )
 

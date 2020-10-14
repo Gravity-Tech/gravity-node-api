@@ -2,9 +2,9 @@ package controller
 
 import (
 	"fmt"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/migrations/common"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/model"
-	"github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2/utils"
+	"github.com/Gravity-Tech/gravity-node-api/migrations/common"
+	"github.com/Gravity-Tech/gravity-node-api/model"
+	"github.com/Gravity-Tech/gravity-node-api/utils"
 	"github.com/go-pg/pg"
 )
 
