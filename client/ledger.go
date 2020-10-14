@@ -47,7 +47,6 @@ func (ledger *LedgerClient) FetchValidatorDetails() (*core_config.ValidatorDetai
 		return nil, err
 	}
 
-
 	validatorDetailsBytes, err := hexutil.Decode(ledger.extractData(*parsedResponse))
 
 	if err != nil {

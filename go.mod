@@ -1,6 +1,6 @@
 module github.com/Gravity-Hub-Org/gravity-node-api-mockup/v2
 
-go 1.13
+go 1.14
 
 require (
 	github.com/dustinkirkland/golang-petname v0.0.0-20191129215211-8e5a1ed0cff0
