@@ -16,6 +16,10 @@ const (
 	materializedViewPostfix = "_materialized_view"
 )
 
+func NewDBController() *DBController {
+	return &DBController{ DB: utils.ConnectToPG() }
+}
+
 func (dbc *DBController) PersistMockup () {
 	nebulas, nodes := utils.GetMockup()
 	datafeeds := utils.GetDatafeedsMockup(250)
@@ -100,10 +104,24 @@ func (dbc *DBController) CommonStats () *model.CommonStats {
 
 }
 
+func (dbc *DBController) AllNodeIPsRecords () *[]*model.NodeIPMapRecord {
+	var list []*model.NodeIPMapRecord
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf("SELECT * FROM %v;", model.DefaultExtendedDBTableNames.NodeIPsMap))
+	dbc.errorHandle("AllNodeIPsRecords", err)
+
+	return &list
+}
+
 func (dbc *DBController) AllNodesList () *[]*model.Node {
 	var list []*model.Node
 
-	_, err := dbc.DB.Query(&list, fmt.Sprintf("SELECT * FROM %v;", model.DefaultExtendedDBTableNames.Nodes))
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *, %[1]v.ip_address
+		FROM %[1]v
+		INNER JOIN  %[2]v
+		ON  %[1]v.public_key =  %[2]v.public_key;
+	`, model.DefaultExtendedDBTableNames.NodeIPsMap, model.DefaultExtendedDBTableNames.Nodes))
 	dbc.errorHandle("AllNodesList", err)
 
 	return &list
@@ -111,6 +129,19 @@ func (dbc *DBController) AllNodesList () *[]*model.Node {
 
 func (dbc *DBController) mapTableToMaterializedView(tableName string) string {
 	return tableName + materializedViewPostfix
+}
+
+func (dbc *DBController) ExactNodeByPubKey (address string) *model.Node {
+	var node model.Node
+
+	destination := model.DefaultExtendedDBTableNames.Nodes
+
+	result, err := dbc.DB.Query(&node, fmt.Sprintf("SELECT * FROM %v WHERE public_key = '%v';", destination, address))
+	dbc.errorHandle("ExactNode", err)
+
+	if result.RowsReturned() == 0 { return nil }
+
+	return &node
 }
 
 func (dbc *DBController) ExactNode (address string) *model.Node {

@@ -36,6 +36,8 @@ type Node struct {
 	// required: true
 	Address string `json:"address"`
 
+	PublicKey string `json:"public_key"`
+
 	Name string  `json:"name"`
 	Description string  `json:"description"`
 	Score Score `json:"score"`
@@ -68,6 +70,11 @@ func (node *Node) Matches (str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+
+type NodeIPMapRecord struct {
+	IPAddress string `json:"ip_address"`
+	PublicKey string `json:"public_key"`
+}
 
 // swagger:model
 type NodeHistoryRecord struct {

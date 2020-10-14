@@ -8,7 +8,7 @@ import (
 )
 
 func init () {
-	tableName := model.DefaultExtendedDBTableNames.Nodes
+	tableName := model.DefaultExtendedDBTableNames.NodeIPsMap
 
 	migrations.MustRegisterTx(
 		func(db migrations.DB) error {
@@ -18,27 +18,18 @@ func init () {
 				CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 				CREATE TABLE %[1]v (
-					address text PRIMARY KEY,
-					public_key text,
-					name text,
-					description text,
-					score int,
-
-					deposit_chain int,
-					deposit_amount bigint,
-
-					joined_at bigint,
-					locked_until bigint,
-
-					nebulas_using text[]
+					ip_address text PRIMARY KEY,
+					public_key text
 				);
-				%v;
+				
+				%[2]v;
 				`, tableName, common.CreateMaterializedViewQuery(tableName)))
 			return err
 		},
 		func(db migrations.DB) error {
 			fmt.Printf("dropping %v table...\n", tableName)
 			_, err := db.Exec(fmt.Sprintf(`%v; DROP TABLE %v;`, common.DropMaterializedViewQuery(tableName), tableName))
+
 			return err
 		},
 	)
