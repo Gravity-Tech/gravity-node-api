@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/Gravity-Tech/gravity-node-api/controller"
 	"github.com/Gravity-Tech/gravity-node-api/client"
-	"github.com/Gravity-Tech/gravity-core/config"
+	"sync"
+
+	//core_config "github.com/Gravity-Tech/gravity-core/config"
 	"time"
 )
 
@@ -19,16 +21,26 @@ func NewNodesCacheUpdater () *NodesCacheUpdater {
 }
 
 func (updater *NodesCacheUpdater) Start() {
-	ledgerClient := client.NewLedgerClient("http://ledger.gravityhub.org/abci_query?path=\"validatorDetails\"")
+	updater.UpdateEntity()
+}
+
+func (updater *NodesCacheUpdater) updateNode(endpoint string, wg *sync.WaitGroup, db *controller.DBController, pubKey string) error {
+	defer wg.Done()
+
+	ledgerClient := client.NewLedgerClient(endpoint)
 
 	details, err := ledgerClient.FetchValidatorDetails()
 
 	if err != nil {
-		fmt.Printf("Error: %v \n", err)
-		return
+		fmt.Printf("Error on fetch: %v \n", err)
+		return err
 	}
 
 	fmt.Printf("Details: %v \n", details)
+
+	err = db.UpdateNodeDetails(pubKey, details)
+
+	return nil
 }
 
 /**
@@ -42,11 +54,16 @@ func (updater *NodesCacheUpdater) UpdateEntity() {
 		updater.log("Node IPs map is empty. Nothing to update")
 		return
 	}
-	//
-	//for _, nodeIPRecord := range *nodeIPsRecords {
-	//	nodeIPRecord.IPAddress
-	//}
 
+	var wg sync.WaitGroup
+	for _, nodeRecord := range *nodeIPsRecords {
+		wg.Add(1)
+
+		endpoint := fmt.Sprintf("http://%v", nodeRecord.IPAddress)
+		go updater.updateNode(endpoint, &wg, db, nodeRecord.PublicKey)
+		//go updater.updateNode(nodeRecord.IPAddress, &wg)
+	}
+	wg.Wait()
 }
 
 //func (updater *NodesCacheUpdater) Fetch

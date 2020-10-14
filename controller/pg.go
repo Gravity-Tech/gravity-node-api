@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"github.com/Gravity-Tech/gravity-core/config"
 	"github.com/Gravity-Tech/gravity-node-api/migrations/common"
 	"github.com/Gravity-Tech/gravity-node-api/model"
 	"github.com/Gravity-Tech/gravity-node-api/utils"
@@ -74,6 +75,36 @@ func (dbc *DBController) persistDatafeedsList(datafeedsList *[]*model.Extractor)
 
 		dbc.errorHandle("Datafeed", err)
 	}
+}
+
+func (dbc *DBController) UpdateNodeDetails(publicKey string, details *config.ValidatorDetails) error {
+	db := dbc.DB
+
+	var node *model.Node
+	for i := 0; i < 2; i++ {
+		_, err := db.Model(node).
+			OnConflict("(public_key) DO UPDATE").
+			Set("name = EXCLUDED.name").
+			Set("description = EXCLUDED.description").
+			Insert()
+		if err != nil {
+			panic(err)
+		}
+
+		err = db.Model(node).WherePK().Select()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(node)
+	}
+
+	_, err := db.Model(node).WherePK().Delete()
+	if err != nil {
+		panic(err)
+	}
+
+	dbc.errorHandle("UpdateNodeDetails", err)
+	return err
 }
 
 func (dbc *DBController) AllDatafeedsList() *[]*model.Extractor {

@@ -3,9 +3,9 @@ package client
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Gravity-Tech/gravity-core/config"
-	"github.com/ethereum/go-ethereum/common/hexutil"
+	coreconfig "github.com/Gravity-Tech/gravity-core/config"
 	abcitypes "github.com/tendermint/tendermint/abci/types"
+	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 	"io/ioutil"
 	"net/http"
 )
@@ -18,18 +18,48 @@ func NewLedgerClient(endpoint string) *LedgerClient {
 	return &LedgerClient{ EndpointURL:endpoint }
 }
 
+type responseResult struct {
+	Response abcitypes.ResponseQuery `json:"response"`
+}
 type fetchResponse struct {
-	Result abcitypes.ResponseQuery `json:"result"`
+	Result *responseResult `json:"result"`
 }
 
 func (ledger *LedgerClient) extractData(response fetchResponse) string {
-	return string(response.Result.Value)
+	return string(response.Result.Response.Value)
 }
 
-func (ledger *LedgerClient) FetchValidatorDetails() (*core_config.ValidatorDetails, error) {
+func (ledger *LedgerClient) extractValidatorInfo(response *ctypes.ResultStatus) *ctypes.ValidatorInfo {
+	return &response.ValidatorInfo
+}
 
-	// http://ledger.gravityhub.org/abci_query?path="validatorDetails"
+func (ledger *LedgerClient) FetchValidatorStatus() (*ctypes.ResultStatus, error) {
+	path := fmt.Sprintf("%v/status", ledger.EndpointURL)
+
+	response, err := http.Get(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+
+	byteValue, err := ioutil.ReadAll(response.Body)
+
+	var resultStatus ctypes.ResultStatus
+
+	err = json.Unmarshal(byteValue, &resultStatus)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &resultStatus, nil
+}
+
+func (ledger *LedgerClient) FetchValidatorDetails() (*coreconfig.ValidatorDetails, error) {
 	path := fmt.Sprintf("%v/abci_query?path=\"validatorDetails\"", ledger.EndpointURL)
+
 	response, err := http.Get(path)
 
 	if err != nil {
@@ -47,14 +77,10 @@ func (ledger *LedgerClient) FetchValidatorDetails() (*core_config.ValidatorDetai
 		return nil, err
 	}
 
-	validatorDetailsBytes, err := hexutil.Decode(ledger.extractData(*parsedResponse))
+	ledgerDataExtracted := ledger.extractData(*parsedResponse)
 
-	if err != nil {
-		return nil, err
-	}
-
-	var validatorDetails core_config.ValidatorDetails
-	err = json.Unmarshal(validatorDetailsBytes, validatorDetails)
+	var validatorDetails coreconfig.ValidatorDetails
+	err = json.Unmarshal([]byte(ledgerDataExtracted), &validatorDetails)
 
 	if err != nil {
 		return nil, err

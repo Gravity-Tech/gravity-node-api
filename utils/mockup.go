@@ -157,6 +157,7 @@ func DuplicateToSimilarNodes(node *model.Node, amount int) *[]model.Node {
 
 		newNode := *node
 		newNode.Name += " " + petname.Name() + " " + petname.Adjective()
+		newNode.PublicKey = mockupRandomAddress()
 		newNode.Score += 5
 		newNode.Address = mockupRandomAddress()
 		newNode.Description = petname.Generate(2, " ")

@@ -1,5 +1,6 @@
 package model
 
+import "github.com/Gravity-Tech/gravity-core/config"
 
 // NodeActionType
 type NodeActionType = int
@@ -68,6 +69,11 @@ func (node *Node) Matches (str string) bool {
 	fieldValues := []string { node.Name, node.Description }
 
 	return MatchStrList(fieldValues, str)
+}
+
+func (node *Node) UpdateByValidatorDetails (details *config.ValidatorDetails) {
+	node.Name = details.Name
+	node.Description = details.Description
 }
 
 
