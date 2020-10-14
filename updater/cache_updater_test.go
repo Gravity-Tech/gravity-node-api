@@ -5,16 +5,26 @@ import (
 	"github.com/Gravity-Tech/gravity-node-api/client"
 	"github.com/Gravity-Tech/gravity-node-api/controller"
 	"github.com/Gravity-Tech/gravity-node-api/model"
+	"github.com/go-pg/pg/v10"
 	"testing"
 )
 
 var ledgerNodeEndpoint = "ledger.gravityhub.org"
 var nodeIPMapRecord *model.NodeIPMapRecord
 
+var dbController *controller.DBController
 var oldNodeVersion, newNodeVersion *model.Node
 var oldNodeFieldValue, newNodeFieldValue string
 
 func InsertDefinedNodeIPRecord() {
+	dbController = controller.NewDBController()
+	dbController.DB = pg.Connect(&pg.Options{
+		Addr: ":5432",
+		User:     "postgres",
+		Password: "123123123",
+		Database: "gravity-api",
+	})
+
 	path := fmt.Sprintf("http://%v", ledgerNodeEndpoint)
 	newClient := client.NewLedgerClient(path)
 
@@ -23,16 +33,14 @@ func InsertDefinedNodeIPRecord() {
 	handleInitError(err)
 	if err != nil { return }
 
-	fmt.Printf("Valiator status: %+v \n", validatorStatus.ValidatorInfo.PubKey)
+	fmt.Printf("Validator status: %+v \n", validatorStatus.ValidatorInfo.PubKey)
 
 	nodeIPMapRecord = &model.NodeIPMapRecord{
 		IPAddress: ledgerNodeEndpoint,
-		PublicKey: string(validatorStatus.ValidatorInfo.PubKey.Bytes()),
+		PublicKey: validatorStatus.ValidatorInfo.PubKey.Value,
 	}
 
-	db := controller.NewDBController()
-
-	err = db.DB.Insert(nodeIPMapRecord)
+	_, _ = dbController.DB.Model(nodeIPMapRecord).Insert()
 
 	handleInitError(err)
 }
@@ -40,37 +48,36 @@ func InsertDefinedNodeIPRecord() {
 func CleanupDefinedNodeIPRecord() {
 	db := controller.NewDBController()
 
-	err := db.DB.Delete(nodeIPMapRecord)
+	_, err := db.DB.Model(&model.NodeIPMapRecord{
+		IPAddress: nodeIPMapRecord.IPAddress,
+	}).WherePK().Delete()
 
 	handleInitError(err)
 }
 
-func TestUpdateNodeDetailsOnNew(t *testing.T) {
+func TestUpdateNodeDetails(t *testing.T) {
 	path := fmt.Sprintf("http://%v", nodeIPMapRecord.IPAddress)
 	t.Logf("Ledger client: %v \n", path)
 	ledgerClient := client.NewLedgerClient(path)
 
+	validatorStatus, err := ledgerClient.FetchValidatorStatus()
 	validatorDetails, err := ledgerClient.FetchValidatorDetails()
 	handleTestError(err, t)
 
-	db := controller.NewDBController()
-
 	// DROP existing node
-	err = db.DB.Delete(&model.Node{ PublicKey: nodeIPMapRecord.PublicKey })
+	nodeToDrop := &model.Node{ PublicKey: nodeIPMapRecord.PublicKey }
+	_, _ = dbController.DB.Model(nodeToDrop).WherePK().Delete()
 	handleTestError(err, t)
 
-	err = db.UpdateNodeDetails(nodeIPMapRecord.PublicKey, validatorDetails)
+	_ = dbController.UpdateNodeDetails(nodeIPMapRecord.PublicKey, validatorDetails, validatorStatus)
 	handleTestError(err, t)
-}
 
-func TestUpdateNodeDetailsExisting(t *testing.T) {
-
+	t.Cleanup(CleanupDefinedNodeIPRecord)
 }
 
 func TestMain(m *testing.M) {
 	InsertDefinedNodeIPRecord()
 	m.Run()
-	CleanupDefinedNodeIPRecord()
 }
 
 func handleInitError(err error) {

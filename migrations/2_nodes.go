@@ -32,7 +32,7 @@ func init () {
 
 					nebulas_using text[],
 					
-					PRIMARY KEY (address, public_key)
+					PRIMARY KEY (public_key)
 				);
 				%v;
 				`, tableName, common.CreateMaterializedViewQuery(tableName)))

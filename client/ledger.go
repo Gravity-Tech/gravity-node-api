@@ -5,9 +5,9 @@ import (
 	"fmt"
 	coreconfig "github.com/Gravity-Tech/gravity-core/config"
 	abcitypes "github.com/tendermint/tendermint/abci/types"
-	ctypes "github.com/tendermint/tendermint/rpc/core/types"
+	//ctypes "github.com/tendermint/tendermint/rpc/core/types"
 	rpctypes "github.com/tendermint/tendermint/rpc/jsonrpc/types"
-	rpcclient "github.com/tendermint/tendermint/rpc/client"
+	//rpcclient "github.com/tendermint/tendermint/rpc/client"
 
 	"io/ioutil"
 	"net/http"
@@ -32,11 +32,33 @@ func (ledger *LedgerClient) extractData(response fetchResponse) string {
 	return string(response.Result.Response.Value)
 }
 
-func (ledger *LedgerClient) extractValidatorInfo(response *ctypes.ResultStatus) *ctypes.ValidatorInfo {
-	return &response.ValidatorInfo
+//func (ledger *LedgerClient) extractValidatorInfo(response *ctypes.ResultStatus) *ctypes.ValidatorInfo {
+//	return &response.ValidatorInfo
+//}
+
+type ValidatorStatus struct {
+	ValidatorInfo *ValidatorInfo `json:"validator_info"`
+}
+type ValidatorInfo struct {
+	Address string
+	PubKey struct {
+		Type string `json:"type"`
+		Value string `json:"value"`
+	} `json:"pub_key"`
 }
 
-func (ledger *LedgerClient) FetchValidatorStatus() (*ctypes.ResultStatus, error) {
+//{
+//	"validator_info": {
+//	"address": "C52EB90B1DF941E17CA50F73248A225C95FAAF2D",
+//	"pub_key": {
+//	"type": "tendermint/PubKeyEd25519",
+//	"value": "iGUd/zzoOUHU9vg7wRTYQG9i6KwIUpA/Ke9aH+KZiVE="
+//	},
+//	"voting_power": "0"
+//	}
+//}
+
+func (ledger *LedgerClient) FetchValidatorStatus() (*ValidatorStatus, error) {
 	path := fmt.Sprintf("%v/status", ledger.EndpointURL)
 
 	response, err := http.Get(path)
@@ -57,16 +79,13 @@ func (ledger *LedgerClient) FetchValidatorStatus() (*ctypes.ResultStatus, error)
 		return nil, err
 	}
 
-	fmt.Printf("statusResponse: %v\n", string(statusResponse.Result))
-
-	var resultResponse ctypes.ResultStatus
+	var resultResponse ValidatorStatus
 	err = json.Unmarshal(statusResponse.Result, &resultResponse)
 
 	if err != nil {
 		return nil, err
 	}
 
-	fmt.Printf("Resp: %+v\n", resultResponse)
 	return &resultResponse, nil
 }
 

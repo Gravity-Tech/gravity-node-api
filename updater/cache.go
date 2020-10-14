@@ -22,13 +22,18 @@ func NewNodesCacheUpdater () *NodesCacheUpdater {
 
 func (updater *NodesCacheUpdater) Start() {
 	updater.UpdateEntity()
+
+	time.Sleep(time.Second * 10)
+	updater.Start()
 }
+
 
 func (updater *NodesCacheUpdater) updateNode(endpoint string, wg *sync.WaitGroup, db *controller.DBController, pubKey string) error {
 	defer wg.Done()
 
 	ledgerClient := client.NewLedgerClient(endpoint)
 
+	validatorStatus, err := ledgerClient.FetchValidatorStatus()
 	details, err := ledgerClient.FetchValidatorDetails()
 
 	if err != nil {
@@ -36,9 +41,10 @@ func (updater *NodesCacheUpdater) updateNode(endpoint string, wg *sync.WaitGroup
 		return err
 	}
 
-	fmt.Printf("Details: %v \n", details)
 
-	err = db.UpdateNodeDetails(pubKey, details)
+	updater.log(fmt.Sprintf("Updated Node details: %+v; Status: %v; \n", details, validatorStatus))
+
+	err = db.UpdateNodeDetails(pubKey, details, validatorStatus)
 
 	return nil
 }

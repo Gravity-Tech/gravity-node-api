@@ -1,6 +1,9 @@
 package model
 
-import "github.com/Gravity-Tech/gravity-core/config"
+import (
+	"github.com/Gravity-Tech/gravity-core/config"
+	"github.com/Gravity-Tech/gravity-node-api/client"
+)
 
 // NodeActionType
 type NodeActionType = int
@@ -37,7 +40,7 @@ type Node struct {
 	// required: true
 	Address string `json:"address"`
 
-	PublicKey string `json:"public_key"`
+	PublicKey string `json:"public_key" pg:",pk"`
 
 	Name string  `json:"name"`
 	Description string  `json:"description"`
@@ -71,14 +74,17 @@ func (node *Node) Matches (str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
-func (node *Node) UpdateByValidatorDetails (details *config.ValidatorDetails) {
+func (node *Node) UpdateByValidatorDetails (details *config.ValidatorDetails, status *client.ValidatorStatus) {
 	node.Name = details.Name
 	node.Description = details.Description
+	node.Address = status.ValidatorInfo.Address
+	node.PublicKey = status.ValidatorInfo.PubKey.Value
 }
 
 
 type NodeIPMapRecord struct {
-	IPAddress string `json:"ip_address"`
+	tableName struct{} `pg:"node_ips_map"`
+	IPAddress string `json:"ip_address" pg:",pk" pg:"ip_address"`
 	PublicKey string `json:"public_key"`
 }
 
