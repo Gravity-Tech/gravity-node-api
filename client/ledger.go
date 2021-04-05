@@ -8,6 +8,7 @@ import (
 	//ctypes "github.com/tendermint/tendermint/rpc/core/types"
 	rpctypes "github.com/tendermint/tendermint/rpc/jsonrpc/types"
 	//rpcclient "github.com/tendermint/tendermint/rpc/client"
+	"strconv"
 
 	"io/ioutil"
 	"net/http"
@@ -119,4 +120,68 @@ func (ledger *LedgerClient) FetchValidatorDetails() (*coreconfig.ValidatorDetail
 	}
 
 	return &validatorDetails, nil
+}
+
+
+func (ledger *LedgerClient) FetchBlock(blockNumber int64) (*BlockResponse, error) {
+	path := fmt.Sprintf("%v/block?height=%v", ledger.EndpointURL, blockNumber)
+
+	response, err := http.Get(path)
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+
+	byteValue, err := ioutil.ReadAll(response.Body)
+
+	var statusResponse rpctypes.RPCResponse
+	err = json.Unmarshal(byteValue, &statusResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	var resultResponse BlockResponse
+	err = json.Unmarshal(statusResponse.Result, &resultResponse)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &resultResponse, nil
+}
+
+func (ledger *LedgerClient) LatestBlock() (*int64, error) {
+
+	path := fmt.Sprintf("%v/status", ledger.EndpointURL)
+
+	response, err := http.Get(path)
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+
+	byteValue, err := ioutil.ReadAll(response.Body)
+
+	var statusResponse rpctypes.RPCResponse
+	err = json.Unmarshal(byteValue, &statusResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	var resultResponse StatusResponse
+	err = json.Unmarshal(statusResponse.Result, &resultResponse)
+
+	if err != nil {
+		return nil, err
+	}
+
+	blockStr := resultResponse.SyncInfo.LatestBlockHeight
+	blockInt, err := strconv.ParseInt(blockStr, 10, 0)
+	if err != nil {
+		return nil, err
+	}
+
+	return &blockInt, nil
 }

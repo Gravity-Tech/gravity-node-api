@@ -200,3 +200,605 @@ func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+func (rc *ResponseController) GetAllTransactions(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllTransactionsList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.Transaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactTransaction(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.Transaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactTransaction(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllSwaps(w http.ResponseWriter, req *http.Request) {
+	swapList := rc.DBControllerDelegate.AllSwapsList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.Swap
+	for _, swap := range *swapList {
+		if queryString == "" {
+			break
+		}
+
+		if swap.Matches(queryString) {
+			matchesList = append(matchesList, swap)
+		}
+	}
+	if queryString != "" {
+		swapList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*swapList), itemsPerPage, pageIndex)
+	*swapList = (*swapList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(swapList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllCommit(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllCommitList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.CommitTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactCommit(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.CommitTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactCommit(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllReveal(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllRevealList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.RevealTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactReveal(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.RevealTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactReveal(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllAddOracle(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllAddOracleList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.AddOracleTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactAddOracle(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.AddOracleTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactAddOracle(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllAddOracleInNebula(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllAddOracleInNebulaList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.AddOracleInNebulaTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactAddOracleInNebula(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.AddOracleInNebulaTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactAddOracleInNebula(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllResult(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllResultList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.ResultTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactResult(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.ResultTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactResult(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllNewRound(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllNewRoundList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.NewRoundTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactNewRound(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.NewRoundTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactNewRound(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllVote(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllVoteList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.VoteTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactVote(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.VoteTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactVote(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllAddNebula(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllAddNebulaList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.AddNebulaTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactAddNebula(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.AddNebulaTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactAddNebula(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllDropNebula(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllDropNebulaList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.DropNebulaTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactDropNebula(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.DropNebulaTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactDropNebula(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllSignNewConsuls(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllSignNewConsulsList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.SignNewConsulsTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactSignNewConsuls(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.SignNewConsulsTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactSignNewConsuls(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllSignNewOracles(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllSignNewOraclesList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.SignNewOraclesTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactSignNewOracles(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.SignNewOraclesTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactSignNewOracles(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetAllApproveLastRound(w http.ResponseWriter, req *http.Request) {
+	txList := rc.DBControllerDelegate.AllApproveLastRoundList()
+
+	queryString, queryPage, queryItemsPerPage := HandleParams(req)
+
+	var matchesList []*model.ApproveLastRoundTransaction
+	for _, transaction := range *txList {
+		if queryString == "" {
+			break
+		}
+
+		if transaction.Matches(queryString) {
+			matchesList = append(matchesList, transaction)
+		}
+	}
+	if queryString != "" {
+		txList = &matchesList
+	}
+
+	currentPage, itemsPerPage := RevealParams(queryPage, queryItemsPerPage)
+	pageIndex := currentPage - 1
+	pageIndexStart, pageIndexEnd := ComputeSliceRange(len(*txList), itemsPerPage, pageIndex)
+	*txList = (*txList)[pageIndexStart:pageIndexEnd]
+
+	bytes, _ := json.Marshal(txList)
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
+func (rc *ResponseController) GetExactApproveLastRound(w http.ResponseWriter, req *http.Request) {
+	txId := req.URL.Query().Get("q")
+
+	var exactTx *model.ApproveLastRoundTransaction
+
+	if txId != "" {
+		exactTx = rc.DBControllerDelegate.ExactApproveLastRound(txId)
+	}
+
+	bytes, _ := json.Marshal(exactTx)
+
+	addBaseHeaders(w.Header())
+
+	_, _ = fmt.Fprint(w, string(bytes))
+}
