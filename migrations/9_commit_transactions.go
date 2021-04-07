@@ -22,6 +22,7 @@ func init () {
 					tx_id integer references transactions (tx_id),
 					nebula_id text,
 					pulse_id integer,
+                    tc_height integer,
 					commit text,
 					oracle_pub_key text
 				);
