@@ -40,3 +40,17 @@ func MatchStrList (fieldValues []string, str string) bool {
 
 	return false
 }
+
+// A NotFoundError is the error message that is generated when server could not find what was requested.
+//
+// swagger:response notFoundError
+type NotFoundError struct {
+	// in: body
+	Body struct {
+		// HTTP status code
+		// example: 404
+		// default: 404
+		Code    int32 `json:"code"`
+		Message error `json:"message"`
+	} `json:"body"`
+}

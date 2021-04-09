@@ -203,3 +203,349 @@ func (dbc *DBController) ExactNebula (address string) *model.Nebula {
 
 	return &nebula
 }
+func (dbc *DBController) AllTransactionsList() *[]*model.Transaction {
+	var list []*model.Transaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v
+ ORDER BY height DESC;
+	`, model.DefaultExtendedDBTableNames.Transactions))
+	dbc.errorHandle("AllTransactionsList", err)
+
+	return &list
+}
+
+func (dbc *DBController) ExactTransaction(txId string) *model.Transaction {
+	var tx model.Transaction
+
+	destination := model.DefaultExtendedDBTableNames.Transactions
+
+	result, err := dbc.DB.Query(&tx, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactTransaction", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &tx
+}
+
+// TODO should be a factory
+
+func (dbc *DBController) AllSwapsList() *[]*model.Swap {
+	var list []*model.Swap
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+        SELECT *
+        FROM
+          (SELECT DISTINCT ON (commit) *
+           FROM %[1]v
+           NATURAL JOIN %[2]v
+           ORDER BY commit, tx_id DESC) as alias
+        ORDER BY tx_id DESC;
+	`, model.DefaultExtendedDBTableNames.RevealTable, model.DefaultExtendedDBTableNames.Transactions))
+	dbc.errorHandle("AllSwapsList", err)
+
+	return &list
+}
+func (dbc *DBController) AllCommitList() *[]*model.CommitTransaction {
+	var list []*model.CommitTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.CommitTable))
+	dbc.errorHandle("AllCommitList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactCommit(txId string) *model.CommitTransaction {
+	var data model.CommitTransaction
+
+	destination := model.DefaultExtendedDBTableNames.CommitTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactCommit", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllRevealList() *[]*model.RevealTransaction {
+	var list []*model.RevealTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.RevealTable))
+	dbc.errorHandle("AllRevealList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactReveal(txId string) *model.RevealTransaction {
+	var data model.RevealTransaction
+
+	destination := model.DefaultExtendedDBTableNames.RevealTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactReveal", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllAddOracleList() *[]*model.AddOracleTransaction {
+	var list []*model.AddOracleTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.AddOracleTable))
+	dbc.errorHandle("AddOracleList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactAddOracle(txId string) *model.AddOracleTransaction {
+	var data model.AddOracleTransaction
+
+	destination := model.DefaultExtendedDBTableNames.AddOracleTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactAddOracle", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllAddOracleInNebulaList() *[]*model.AddOracleInNebulaTransaction {
+	var list []*model.AddOracleInNebulaTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.AddOracleInNebulaTable))
+	dbc.errorHandle("AllAddOracleInNebulaList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactAddOracleInNebula(txId string) *model.AddOracleInNebulaTransaction {
+	var data model.AddOracleInNebulaTransaction
+
+	destination := model.DefaultExtendedDBTableNames.AddOracleInNebulaTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactAddOracleInNebula", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllResultList() *[]*model.ResultTransaction {
+	var list []*model.ResultTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.ResultTable))
+	dbc.errorHandle("AllResultList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactResult(txId string) *model.ResultTransaction {
+	var data model.ResultTransaction
+
+	destination := model.DefaultExtendedDBTableNames.ResultTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactResult", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllNewRoundList() *[]*model.NewRoundTransaction {
+	var list []*model.NewRoundTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.NewRoundTable))
+	dbc.errorHandle("AllNewRoundList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactNewRound(txId string) *model.NewRoundTransaction {
+	var data model.NewRoundTransaction
+
+	destination := model.DefaultExtendedDBTableNames.NewRoundTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactNewRound", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllVoteList() *[]*model.VoteTransaction {
+	var list []*model.VoteTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.VoteTable))
+	dbc.errorHandle("AllVoteList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactVote(txId string) *model.VoteTransaction {
+	var data model.VoteTransaction
+
+	destination := model.DefaultExtendedDBTableNames.VoteTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactVote", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllAddNebulaList() *[]*model.AddNebulaTransaction {
+	var list []*model.AddNebulaTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.AddNebulaTable))
+	dbc.errorHandle("AllAddNebulaList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactAddNebula(txId string) *model.AddNebulaTransaction {
+	var data model.AddNebulaTransaction
+
+	destination := model.DefaultExtendedDBTableNames.AddNebulaTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactAddNebula", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllDropNebulaList() *[]*model.DropNebulaTransaction {
+	var list []*model.DropNebulaTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.DropNebulaTable))
+	dbc.errorHandle("AllDropNebulaList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactDropNebula(txId string) *model.DropNebulaTransaction {
+	var data model.DropNebulaTransaction
+
+	destination := model.DefaultExtendedDBTableNames.DropNebulaTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactDropNebula", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllSignNewConsulsList() *[]*model.SignNewConsulsTransaction {
+	var list []*model.SignNewConsulsTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.SignNewConsulsTable))
+	dbc.errorHandle("AllSignNewConsulsList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactSignNewConsuls(txId string) *model.SignNewConsulsTransaction {
+	var data model.SignNewConsulsTransaction
+
+	destination := model.DefaultExtendedDBTableNames.SignNewConsulsTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactSignNewConsuls", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllSignNewOraclesList() *[]*model.SignNewOraclesTransaction {
+	var list []*model.SignNewOraclesTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.SignNewOraclesTable))
+	dbc.errorHandle("AllSignNewOraclesList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactSignNewOracles(txId string) *model.SignNewOraclesTransaction {
+	var data model.SignNewOraclesTransaction
+
+	destination := model.DefaultExtendedDBTableNames.SignNewOraclesTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactSignNewOracles", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}
+func (dbc *DBController) AllApproveLastRoundList() *[]*model.ApproveLastRoundTransaction {
+	var list []*model.ApproveLastRoundTransaction
+
+	_, err := dbc.DB.Query(&list, fmt.Sprintf(`
+		SELECT *
+		FROM %[1]v;
+	`, model.DefaultExtendedDBTableNames.ApproveLastRoundTable))
+	dbc.errorHandle("AllApproveLastRoundList", err)
+
+	return &list
+}
+func (dbc *DBController) ExactApproveLastRound(txId string) *model.ApproveLastRoundTransaction {
+	var data model.ApproveLastRoundTransaction
+
+	destination := model.DefaultExtendedDBTableNames.ApproveLastRoundTable
+
+	result, err := dbc.DB.Query(&data, fmt.Sprintf("SELECT * FROM %v WHERE tx_id = '%v';", destination, txId))
+	dbc.errorHandle("ExactApproveLastRound", err)
+
+	if result.RowsReturned() == 0 {
+		return nil
+	}
+
+	return &data
+}

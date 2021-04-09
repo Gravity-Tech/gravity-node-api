@@ -222,7 +222,7 @@
             }
           },
           "404": {
-            "$ref": "#/responses/null"
+            "$ref": "#/responses/notFoundError"
           }
         }
       }
@@ -388,7 +388,7 @@
             }
           },
           "404": {
-            "$ref": "#/responses/null"
+            "$ref": "#/responses/notFoundError"
           }
         }
       }
@@ -453,9 +453,1523 @@
           }
         }
       }
+    },
+    "/transactions/add-nebula/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity add-nebula transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddNebula"
+        ],
+        "summary": "Returns all available gravity add-nebula transactions",
+        "operationId": "getAllAddNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddNebulaTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddNebulaTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/add-nebula/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact add-nebula by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddNebula"
+        ],
+        "operationId": "getExactAddNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddNebulaTransaction",
+            "schema": {
+              "$ref": "#/definitions/AddNebulaTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/add-oracle-in-nebula/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity add-oracle-in-nebula transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddOracleInNebula"
+        ],
+        "summary": "Returns all available gravity add-oracle-in-nebula transactions",
+        "operationId": "getAllAddOracleInNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddOracleInNebulaTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddOracleInNebulaTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/add-oracle-in-nebula/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact add-oracle-in-nebula by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddOracleInNebula"
+        ],
+        "operationId": "getExactAddOracleInNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddOracleInNebulaTransaction",
+            "schema": {
+              "$ref": "#/definitions/AddOracleInNebulaTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/add-oracle/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity add-oracle transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddOracle"
+        ],
+        "summary": "Returns all available gravity add-oracle transactions",
+        "operationId": "getAllAddOracle",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddOracleTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddOracleTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/add-oracle/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact add-oracle by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "AddOracle"
+        ],
+        "operationId": "getExactAddOracle",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AddOracleTransaction",
+            "schema": {
+              "$ref": "#/definitions/AddOracleTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Returns all available gravity transactions",
+        "operationId": "getAllTransactions",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Transaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/approve-last-round/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity approve-last-round transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "ApproveLastRound"
+        ],
+        "summary": "Returns all available gravity approve-last-round transactions",
+        "operationId": "getAllApproveLastRound",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ApproveLastRoundTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApproveLastRoundTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/approve-last-round/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact approve-last-round by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "ApproveLastRound"
+        ],
+        "operationId": "getExactApproveLastRound",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ApproveLastRoundTransaction",
+            "schema": {
+              "$ref": "#/definitions/ApproveLastRoundTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/commit/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity commit transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Commit"
+        ],
+        "summary": "Returns all available gravity commit transactions",
+        "operationId": "getAllCommit",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CommitTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CommitTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/commit/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact commit by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Commit"
+        ],
+        "operationId": "getExactCommit",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CommitTransaction",
+            "schema": {
+              "$ref": "#/definitions/CommitTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/drop-nebula/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity drop-nebula transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "DropNebula"
+        ],
+        "summary": "Returns all available gravity drop-nebula transactions",
+        "operationId": "getAllDropNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DropNebulaTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DropNebulaTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/drop-nebula/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact drop-nebula by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "DropNebula"
+        ],
+        "operationId": "getExactDropNebula",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DropNebulaTransaction",
+            "schema": {
+              "$ref": "#/definitions/DropNebulaTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact transaction by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "getExactTransaction",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/new-round/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity new-round transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "NewRound"
+        ],
+        "summary": "Returns all available gravity new-round transactions",
+        "operationId": "getAllNewRound",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NewRoundTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NewRoundTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/new-round/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact new-round by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "NewRound"
+        ],
+        "operationId": "getExactNewRound",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NewRoundTransaction",
+            "schema": {
+              "$ref": "#/definitions/NewRoundTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/result/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity result transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Result"
+        ],
+        "summary": "Returns all available gravity result transactions",
+        "operationId": "getAllResult",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ResultTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResultTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/result/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact result by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Result"
+        ],
+        "operationId": "getExactResult",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ResultTransaction",
+            "schema": {
+              "$ref": "#/definitions/ResultTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/reveal/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity reveal transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Reveal"
+        ],
+        "summary": "Returns all available gravity reveal transactions",
+        "operationId": "getAllReveal",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RevealTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RevealTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/reveal/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact reveal by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Reveal"
+        ],
+        "operationId": "getExactReveal",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RevealTransaction",
+            "schema": {
+              "$ref": "#/definitions/RevealTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/sign-new-consuls/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity sign-new-consuls transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "SignNewConsuls"
+        ],
+        "summary": "Returns all available gravity sign-new-consuls transactions",
+        "operationId": "getAllSignNewConsuls",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SignNewConsulsTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignNewConsulsTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/sign-new-consuls/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact sign-new-consuls by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "SignNewConsuls"
+        ],
+        "operationId": "getExactSignNewConsuls",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SignNewConsulsTransaction",
+            "schema": {
+              "$ref": "#/definitions/SignNewConsulsTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/sign-new-oracles/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity sign-new-oracles transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "SignNewOracles"
+        ],
+        "summary": "Returns all available gravity sign-new-oracles transactions",
+        "operationId": "getAllSignNewOracles",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SignNewOraclesTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignNewOraclesTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/sign-new-oracles/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact sign-new-oracles by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "SignNewOracles"
+        ],
+        "operationId": "getExactSignNewOracles",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SignNewOraclesTransaction",
+            "schema": {
+              "$ref": "#/definitions/SignNewOraclesTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
+    },
+    "/transactions/swap/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity swaps",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Swaps"
+        ],
+        "summary": "Returns all available gravity swaps",
+        "operationId": "getAllSwaps",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Swap",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Swap"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/vote/all": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "This will show all available gravity vote transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Vote"
+        ],
+        "summary": "Returns all available gravity vote transactions",
+        "operationId": "getAllVote",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Page",
+            "description": "a CurrentPageParam represents current page\nOnly positive integers allowed. Default is 1",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "uint64",
+            "x-go-name": "Items",
+            "description": "an ItemsPerPageParam represents items count per page\nOnly positive integers allowed. Default is 12",
+            "name": "items",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "VoteTransaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VoteTransaction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/vote/exact": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "description": "Returns exact vote by txId",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Vote"
+        ],
+        "operationId": "getExactVote",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "Query",
+            "description": "a QueryParam acts like a search string for fields.\nUse as a regexp expression.",
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "VoteTransaction",
+            "schema": {
+              "$ref": "#/definitions/VoteTransaction"
+            }
+          },
+          "404": {
+            "$ref": "#/responses/notFoundError"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AddNebulaTransaction": {
+      "type": "object",
+      "properties": {
+        "b": {
+          "type": "string",
+          "x-go-name": "B"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "AddOracleInNebulaTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "AddOracleTransaction": {
+      "type": "object",
+      "properties": {
+        "chain_type": {
+          "type": "string",
+          "x-go-name": "ChainType"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "ApproveLastRoundTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
     "Asset": {
       "type": "object",
       "properties": {
@@ -471,6 +1985,44 @@
         "name": {
           "type": "string",
           "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "CommitTransaction": {
+      "type": "object",
+      "properties": {
+        "commit": {
+          "type": "string",
+          "x-go-name": "Commit"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "pulse_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "PulseId"
+        },
+        "tc_height": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TcHeight"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
         }
       },
       "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
@@ -492,6 +2044,26 @@
           "type": "integer",
           "format": "uint64",
           "x-go-name": "Pulses"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "DropNebulaTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
         }
       },
       "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
@@ -582,6 +2154,22 @@
       },
       "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
     },
+    "NewRoundTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
     "Node": {
       "type": "object",
       "required": [
@@ -628,6 +2216,10 @@
             "type": "string"
           },
           "x-go-name": "NebulasUsing"
+        },
+        "public_key": {
+          "type": "string",
+          "x-go-name": "PublicKey"
         },
         "score": {
           "type": "integer",
@@ -721,6 +2313,286 @@
         }
       },
       "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "ResultTransaction": {
+      "type": "object",
+      "properties": {
+        "chain_type": {
+          "type": "string",
+          "x-go-name": "ChainType"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "pulse_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "PulseId"
+        },
+        "sign": {
+          "type": "string",
+          "x-go-name": "Sign"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "RevealTransaction": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "x-go-name": "Amount"
+        },
+        "commit": {
+          "type": "string",
+          "x-go-name": "Commit"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "pulse_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "PulseId"
+        },
+        "receiver": {
+          "type": "string",
+          "x-go-name": "Receiver"
+        },
+        "rq": {
+          "type": "string",
+          "x-go-name": "Rq"
+        },
+        "tc_height": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TcHeight"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "SignNewConsulsTransaction": {
+      "type": "object",
+      "properties": {
+        "chain_type": {
+          "type": "string",
+          "x-go-name": "ChainType"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "round_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "RoundId"
+        },
+        "sign": {
+          "type": "string",
+          "x-go-name": "Sign"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "SignNewOraclesTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "round_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "RoundId"
+        },
+        "sign": {
+          "type": "string",
+          "x-go-name": "Sign"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "Swap": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "x-go-name": "Amount"
+        },
+        "commit": {
+          "type": "string",
+          "x-go-name": "Commit"
+        },
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "func_type": {
+          "type": "string",
+          "x-go-name": "FuncType"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Height"
+        },
+        "nebula_id": {
+          "type": "string",
+          "x-go-name": "NebulaId"
+        },
+        "oracle_pubkey": {
+          "type": "string",
+          "x-go-name": "OraclePubKey"
+        },
+        "pulse_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "PulseId"
+        },
+        "receiver": {
+          "type": "string",
+          "x-go-name": "Receiver"
+        },
+        "rq": {
+          "type": "string",
+          "x-go-name": "Rq"
+        },
+        "tc_height": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TcHeight"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "Time"
+        },
+        "tx_hash": {
+          "type": "string",
+          "x-go-name": "TxHash"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "func_type": {
+          "type": "string",
+          "x-go-name": "FuncType"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Height"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "Time"
+        },
+        "tx_hash": {
+          "type": "string",
+          "x-go-name": "TxHash"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    },
+    "VoteTransaction": {
+      "type": "object",
+      "properties": {
+        "data_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "DataId"
+        },
+        "tx_id": {
+          "type": "integer",
+          "format": "uint64",
+          "x-go-name": "TxId"
+        }
+      },
+      "x-go-package": "github.com/Gravity-Tech/gravity-node-api/model"
+    }
+  },
+  "responses": {
+    "notFoundError": {
+      "description": "A NotFoundError is the error message that is generated when server could not find what was requested.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code",
+            "type": "integer",
+            "format": "int32",
+            "default": 404,
+            "x-go-name": "Code",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
