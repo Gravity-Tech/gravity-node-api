@@ -89,7 +89,7 @@ func (rc *ResponseController) GetAllNebulas(w http.ResponseWriter, req *http.Req
 //
 //     Responses:
 //       200: Nebula
-//		 404: null
+//		 404: notFoundError
 func (rc *ResponseController) GetExactNebula (w http.ResponseWriter, req *http.Request) {
 	address := req.URL.Query().Get("q")
 	exactNebula := rc.DBControllerDelegate.ExactNebula(address)

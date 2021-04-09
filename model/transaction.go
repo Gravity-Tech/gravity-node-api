@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// swagger:model
 type Transaction struct {
 	TxId     uint64    `json:"tx_id"`
 	TxHash   string    `json:"tx_hash"`
@@ -18,6 +19,7 @@ func (tx *Transaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type Swap struct {
 	TxId         uint64    `json:"tx_id"`
 	TxHash       string    `json:"tx_hash"`
@@ -41,6 +43,7 @@ func (swap *Swap) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type CommitTransaction struct {
 	DataId       uint64 `json:"data_id"`
 	TxId         uint64 `json:"tx_id"`
@@ -57,6 +60,7 @@ func (tx *CommitTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type RevealTransaction struct {
 	DataId       uint64 `json:"data_id"`
 	TxId         uint64 `json:"tx_id"`
@@ -76,6 +80,7 @@ func (tx *RevealTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type AddOracleTransaction struct {
 	DataId       uint64 `json:"data_id"`
 	TxId         uint64 `json:"tx_id"`
@@ -89,6 +94,7 @@ func (tx *AddOracleTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type AddOracleInNebulaTransaction struct {
 	DataId       uint64 `json:"data_id"`
 	TxId         uint64 `json:"tx_id"`
@@ -102,6 +108,7 @@ func (tx *AddOracleInNebulaTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type ResultTransaction struct {
 	DataId       uint64 `json:"data_id"`
 	TxId         uint64 `json:"tx_id"`
@@ -118,6 +125,7 @@ func (tx *ResultTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type NewRoundTransaction struct {
 	DataId uint64 `json:"data_id"`
 	TxId   uint64 `json:"tx_id"`
@@ -129,6 +137,7 @@ func (tx *NewRoundTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type VoteTransaction struct {
 	DataId uint64 `json:"data_id"`
 	TxId   uint64 `json:"tx_id"`
@@ -140,6 +149,7 @@ func (tx *VoteTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type AddNebulaTransaction struct {
 	DataId   uint64 `json:"data_id"`
 	TxId     uint64 `json:"tx_id"`
@@ -153,6 +163,7 @@ func (tx *AddNebulaTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type DropNebulaTransaction struct {
 	DataId   uint64 `json:"data_id"`
 	TxId     uint64 `json:"tx_id"`
@@ -165,6 +176,7 @@ func (tx *DropNebulaTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type SignNewConsulsTransaction struct {
 	DataId    uint64 `json:"data_id"`
 	TxId      uint64 `json:"tx_id"`
@@ -179,6 +191,7 @@ func (tx *SignNewConsulsTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type SignNewOraclesTransaction struct {
 	DataId   uint64 `json:"data_id"`
 	TxId     uint64 `json:"tx_id"`
@@ -193,6 +206,7 @@ func (tx *SignNewOraclesTransaction) Matches(str string) bool {
 	return MatchStrList(fieldValues, str)
 }
 
+// swagger:model
 type ApproveLastRoundTransaction struct {
 	DataId uint64 `json:"data_id"`
 	TxId   uint64 `json:"tx_id"`

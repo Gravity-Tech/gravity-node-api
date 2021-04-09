@@ -1,9 +1,5 @@
 package decoder
 
-import (
-	"strings"
-)
-
 type ID [32]byte
 
 type Type string
@@ -76,35 +72,3 @@ const (
 	WavesAddressLength    = 26
 )
 
-type DataType string
-type ExtractorData struct {
-	Type  DataType
-	Value string
-}
-
-const (
-	StringDataType DataType = "string"
-	Int64DataType  DataType = "int64"
-	Base64DataType DataType = "base64"
-)
-
-type ExtractorType uint8
-
-const (
-	Int64ExtractorType ExtractorType = iota
-	StringExtractorType
-	BytesExtractorType
-)
-
-func ParseExtractorType(extractorType string) (ExtractorType, error) {
-	switch strings.ToLower(extractorType) {
-	case "int64":
-		return Int64ExtractorType, nil
-	case "string":
-		return StringExtractorType, nil
-	case "bytes":
-		return BytesExtractorType, nil
-	default:
-		return 0, nil
-	}
-}

@@ -130,7 +130,7 @@ func (rc *ResponseController) GetAllNodes(w http.ResponseWriter, req *http.Reque
 //
 //     Responses:
 //       200: Node
-//		 404: null
+//		 404: notFoundError
 func (rc *ResponseController) GetExactNode (w http.ResponseWriter, req *http.Request) {
 	address := req.URL.Query().Get("q")
 	publicKey := req.URL.Query().Get("pubKey")
@@ -201,6 +201,27 @@ func (rc *ResponseController) GetNodeActionsHistory(w http.ResponseWriter, req *
 	_, _ = fmt.Fprint(w, string(bytes))
 }
 
+// swagger:route GET /transactions/all Transactions getAllTransactions
+//
+// Returns all available gravity transactions
+//
+// This will show all available gravity transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []Transaction
 func (rc *ResponseController) GetAllTransactions(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllTransactionsList()
 
@@ -230,6 +251,27 @@ func (rc *ResponseController) GetAllTransactions(w http.ResponseWriter, req *htt
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/exact Transactions getExactTransaction
+//
+// Returns exact transaction by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: Transaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactTransaction(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -245,6 +287,28 @@ func (rc *ResponseController) GetExactTransaction(w http.ResponseWriter, req *ht
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/swap/all Swaps getAllSwaps
+//
+// Returns all available gravity swaps
+//
+// This will show all available gravity swaps
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []Swap
 func (rc *ResponseController) GetAllSwaps(w http.ResponseWriter, req *http.Request) {
 	swapList := rc.DBControllerDelegate.AllSwapsList()
 
@@ -274,6 +338,28 @@ func (rc *ResponseController) GetAllSwaps(w http.ResponseWriter, req *http.Reque
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/commit/all Commit getAllCommit
+//
+// Returns all available gravity commit transactions
+//
+// This will show all available gravity commit transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []CommitTransaction
 func (rc *ResponseController) GetAllCommit(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllCommitList()
 
@@ -303,6 +389,27 @@ func (rc *ResponseController) GetAllCommit(w http.ResponseWriter, req *http.Requ
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/commit/exact Commit getExactCommit
+//
+// Returns exact commit by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: CommitTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactCommit(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -318,6 +425,28 @@ func (rc *ResponseController) GetExactCommit(w http.ResponseWriter, req *http.Re
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/reveal/all Reveal getAllReveal
+//
+// Returns all available gravity reveal transactions
+//
+// This will show all available gravity reveal transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []RevealTransaction
 func (rc *ResponseController) GetAllReveal(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllRevealList()
 
@@ -347,6 +476,27 @@ func (rc *ResponseController) GetAllReveal(w http.ResponseWriter, req *http.Requ
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/reveal/exact Reveal getExactReveal
+//
+// Returns exact reveal by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: RevealTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactReveal(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -362,6 +512,28 @@ func (rc *ResponseController) GetExactReveal(w http.ResponseWriter, req *http.Re
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/add-oracle/all AddOracle getAllAddOracle
+//
+// Returns all available gravity add-oracle transactions
+//
+// This will show all available gravity add-oracle transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []AddOracleTransaction
 func (rc *ResponseController) GetAllAddOracle(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllAddOracleList()
 
@@ -391,6 +563,27 @@ func (rc *ResponseController) GetAllAddOracle(w http.ResponseWriter, req *http.R
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/add-oracle/exact AddOracle getExactAddOracle
+//
+// Returns exact add-oracle by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: AddOracleTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactAddOracle(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -406,6 +599,27 @@ func (rc *ResponseController) GetExactAddOracle(w http.ResponseWriter, req *http
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/add-oracle-in-nebula/all AddOracleInNebula getAllAddOracleInNebula
+//
+// Returns all available gravity add-oracle-in-nebula transactions
+//
+// This will show all available gravity add-oracle-in-nebula transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []AddOracleInNebulaTransaction
 func (rc *ResponseController) GetAllAddOracleInNebula(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllAddOracleInNebulaList()
 
@@ -435,6 +649,27 @@ func (rc *ResponseController) GetAllAddOracleInNebula(w http.ResponseWriter, req
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/add-oracle-in-nebula/exact AddOracleInNebula getExactAddOracleInNebula
+//
+// Returns exact add-oracle-in-nebula by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: AddOracleInNebulaTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactAddOracleInNebula(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -450,6 +685,28 @@ func (rc *ResponseController) GetExactAddOracleInNebula(w http.ResponseWriter, r
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/result/all Result getAllResult
+//
+// Returns all available gravity result transactions
+//
+// This will show all available gravity result transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []ResultTransaction
 func (rc *ResponseController) GetAllResult(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllResultList()
 
@@ -479,6 +736,27 @@ func (rc *ResponseController) GetAllResult(w http.ResponseWriter, req *http.Requ
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/result/exact Result getExactResult
+//
+// Returns exact result by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: ResultTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactResult(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -494,6 +772,28 @@ func (rc *ResponseController) GetExactResult(w http.ResponseWriter, req *http.Re
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/new-round/all NewRound getAllNewRound
+//
+// Returns all available gravity new-round transactions
+//
+// This will show all available gravity new-round transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []NewRoundTransaction
 func (rc *ResponseController) GetAllNewRound(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllNewRoundList()
 
@@ -523,6 +823,27 @@ func (rc *ResponseController) GetAllNewRound(w http.ResponseWriter, req *http.Re
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/new-round/exact NewRound getExactNewRound
+//
+// Returns exact new-round by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: NewRoundTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactNewRound(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -538,6 +859,28 @@ func (rc *ResponseController) GetExactNewRound(w http.ResponseWriter, req *http.
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/vote/all Vote getAllVote
+//
+// Returns all available gravity vote transactions
+//
+// This will show all available gravity vote transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []VoteTransaction
 func (rc *ResponseController) GetAllVote(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllVoteList()
 
@@ -567,6 +910,27 @@ func (rc *ResponseController) GetAllVote(w http.ResponseWriter, req *http.Reques
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/vote/exact Vote getExactVote
+//
+// Returns exact vote by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: VoteTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactVote(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -582,6 +946,28 @@ func (rc *ResponseController) GetExactVote(w http.ResponseWriter, req *http.Requ
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/add-nebula/all AddNebula getAllAddNebula
+//
+// Returns all available gravity add-nebula transactions
+//
+// This will show all available gravity add-nebula transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []AddNebulaTransaction
 func (rc *ResponseController) GetAllAddNebula(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllAddNebulaList()
 
@@ -611,6 +997,27 @@ func (rc *ResponseController) GetAllAddNebula(w http.ResponseWriter, req *http.R
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/add-nebula/exact AddNebula getExactAddNebula
+//
+// Returns exact add-nebula by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: AddNebulaTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactAddNebula(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -626,6 +1033,28 @@ func (rc *ResponseController) GetExactAddNebula(w http.ResponseWriter, req *http
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/drop-nebula/all DropNebula getAllDropNebula
+//
+// Returns all available gravity drop-nebula transactions
+//
+// This will show all available gravity drop-nebula transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []DropNebulaTransaction
 func (rc *ResponseController) GetAllDropNebula(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllDropNebulaList()
 
@@ -655,6 +1084,27 @@ func (rc *ResponseController) GetAllDropNebula(w http.ResponseWriter, req *http.
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/drop-nebula/exact DropNebula getExactDropNebula
+//
+// Returns exact drop-nebula by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: DropNebulaTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactDropNebula(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -670,6 +1120,28 @@ func (rc *ResponseController) GetExactDropNebula(w http.ResponseWriter, req *htt
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/sign-new-consuls/all SignNewConsuls getAllSignNewConsuls
+//
+// Returns all available gravity sign-new-consuls transactions
+//
+// This will show all available gravity sign-new-consuls transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []SignNewConsulsTransaction
 func (rc *ResponseController) GetAllSignNewConsuls(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllSignNewConsulsList()
 
@@ -699,6 +1171,27 @@ func (rc *ResponseController) GetAllSignNewConsuls(w http.ResponseWriter, req *h
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/sign-new-consuls/exact SignNewConsuls getExactSignNewConsuls
+//
+// Returns exact sign-new-consuls by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: SignNewConsulsTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactSignNewConsuls(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -714,6 +1207,28 @@ func (rc *ResponseController) GetExactSignNewConsuls(w http.ResponseWriter, req 
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/sign-new-oracles/all SignNewOracles getAllSignNewOracles
+//
+// Returns all available gravity sign-new-oracles transactions
+//
+// This will show all available gravity sign-new-oracles transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []SignNewOraclesTransaction
 func (rc *ResponseController) GetAllSignNewOracles(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllSignNewOraclesList()
 
@@ -743,6 +1258,27 @@ func (rc *ResponseController) GetAllSignNewOracles(w http.ResponseWriter, req *h
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/sign-new-oracles/exact SignNewOracles getExactSignNewOracles
+//
+// Returns exact sign-new-oracles by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: SignNewOraclesTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactSignNewOracles(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
@@ -758,6 +1294,28 @@ func (rc *ResponseController) GetExactSignNewOracles(w http.ResponseWriter, req 
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+
+// swagger:route GET /transactions/approve-last-round/all ApproveLastRound getAllApproveLastRound
+//
+// Returns all available gravity approve-last-round transactions
+//
+// This will show all available gravity approve-last-round transactions
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: []ApproveLastRoundTransaction
 func (rc *ResponseController) GetAllApproveLastRound(w http.ResponseWriter, req *http.Request) {
 	txList := rc.DBControllerDelegate.AllApproveLastRoundList()
 
@@ -787,6 +1345,27 @@ func (rc *ResponseController) GetAllApproveLastRound(w http.ResponseWriter, req 
 
 	_, _ = fmt.Fprint(w, string(bytes))
 }
+// swagger:route GET /transactions/approve-last-round/exact ApproveLastRound getExactApproveLastRound
+//
+// Returns exact approve-last-round by txId
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http, https
+//
+//     Deprecated: false
+//
+//     Security:
+//       api_key:
+//
+//     Responses:
+//       200: ApproveLastRoundTransaction
+//		 404: notFoundError
 func (rc *ResponseController) GetExactApproveLastRound(w http.ResponseWriter, req *http.Request) {
 	txId := req.URL.Query().Get("q")
 
