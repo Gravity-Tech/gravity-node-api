@@ -61,8 +61,9 @@ func (updater *NodesCacheUpdater) CacheArgsCommit(args []decoder.Arg, txId uint6
 		Commit:       commit,
 		OraclePubKey: oraclePubKey}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -84,8 +85,9 @@ func (updater *NodesCacheUpdater) CacheArgsReveal(args []decoder.Arg, txId uint6
 		Amount:       amount,
 		Receiver:     receiver}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -104,8 +106,9 @@ func (updater *NodesCacheUpdater) CacheArgsResult(args []decoder.Arg, txId uint6
 		ChainType:    chainType.String(),
 		OraclePubKey: oraclePubKey}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -121,8 +124,9 @@ func (updater *NodesCacheUpdater) CacheArgsAddOracleInNebula(args []decoder.Arg,
 		NebulaId:     nebulaId,
 		OraclePubKey: oraclePubKey}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -138,8 +142,9 @@ func (updater *NodesCacheUpdater) CacheArgsAddOracle(args []decoder.Arg, txId ui
 		ChainType:    chainType.String(),
 		OraclePubKey: oraclePubKey}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -151,8 +156,9 @@ func (updater *NodesCacheUpdater) CacheArgsNewRound(args []decoder.Arg, txId uin
 	db := updater.DB.DB
 	metadata := model.NewRoundTransaction{TxId: txId}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -164,8 +170,9 @@ func (updater *NodesCacheUpdater) CacheArgsVote(args []decoder.Arg, txId uint64)
 	db := updater.DB.DB
 	metadata := model.VoteTransaction{TxId: txId}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -181,8 +188,9 @@ func (updater *NodesCacheUpdater) CacheArgsAddNebula(args []decoder.Arg, txId ui
 		NebulaId: nebulaId,
 		B:        b}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -197,8 +205,9 @@ func (updater *NodesCacheUpdater) CacheArgsDropNebula(args []decoder.Arg, txId u
 		TxId:     txId,
 		NebulaId: nebulaId}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -215,8 +224,9 @@ func (updater *NodesCacheUpdater) CacheArgsSignNewConsuls(args []decoder.Arg, tx
 		RoundId:   roundId,
 		Sign:      sign}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -233,8 +243,9 @@ func (updater *NodesCacheUpdater) CacheArgsSignNewOracles(args []decoder.Arg, tx
 		Sign:     sign,
 		NebulaId: nebulaId}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err
@@ -246,8 +257,9 @@ func (updater *NodesCacheUpdater) CacheArgsApproveLastRound(args []decoder.Arg, 
 	db := updater.DB.DB
 	metadata := model.ApproveLastRoundTransaction{TxId: txId}
 	_, err = db.Model(&metadata).
+	  Where("tx_id = ?tx_id").
 		OnConflict("DO NOTHING").
-		Insert()
+		SelectOrInsert()
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return err

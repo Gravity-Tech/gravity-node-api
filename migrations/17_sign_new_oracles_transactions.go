@@ -20,7 +20,7 @@ func init () {
 				CREATE TABLE %[1]v (
                     data_id serial primary key,
                     tx_id integer references transactions (tx_id),
-                    round_id integer,
+                    round_id bigint,
                     sign text,
                     nebula_id text
 				);

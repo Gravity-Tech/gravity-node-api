@@ -21,7 +21,7 @@ func init () {
                     data_id serial primary key,
                     tx_id integer references transactions (tx_id),
                     chain_type text,
-                    round_id integer,
+                    round_id bigint,
                     sign text
 				);
 				%v;

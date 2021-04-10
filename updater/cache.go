@@ -27,7 +27,7 @@ func NewNodesCacheUpdater () *NodesCacheUpdater {
 }
 
 func (updater *NodesCacheUpdater) Start() {
-	updater.UpdateEntity()
+	//updater.UpdateEntity()
 
 	latestBlock, err := updater.LatestBlock()
 	if err != nil {
@@ -47,11 +47,12 @@ func (updater *NodesCacheUpdater) Start() {
 		fmt.Printf("Caching block %v\n", i)
 		err = updater.CacheTransactions(i)
 		if err != nil {
+			fmt.Printf("Error on caching transactions: %v\n", err)
 			break
 		}
 	}
 
-	time.Sleep(time.Minute * 10)
+	time.Sleep(time.Minute * 1)
 	updater.Start()
 }
 
@@ -136,14 +137,16 @@ func (updater *NodesCacheUpdater) CacheTransactions(height int64) error {
 			Time:     blockTime}
 
 		_, err = db.Model(&tx).
+		  Where("tx_hash = ?tx_hash").
 			OnConflict("DO NOTHING").
-			Insert()
+			SelectOrInsert()
 		if err != nil {
-			fmt.Printf("%s\n", err)
+			fmt.Printf("Error caching tx body %s\n", err)
 		}
 
 		err = updater.CacheArgs(txP.Func, txP.Args, tx.TxId)
 		if err != nil {
+			fmt.Printf("Error caching tx args %s\n", err)
 			return err
 		}
 		time.Sleep(time.Second * 1)
