@@ -21,8 +21,8 @@ func init () {
 					data_id serial primary key,
 					tx_id integer references transactions (tx_id),
 					nebula_id text,
-					pulse_id integer,
-                    tc_height integer,
+					pulse_id bigint,
+                    tc_height bigint,
 					commit text,
 					oracle_pub_key text
 				);
